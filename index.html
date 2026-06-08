@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김지유 첫 번째 생일잔치</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="hero-frame">
+            <span class="corner corner-tl">✿</span>
+            <span class="corner corner-tr">✿</span>
+            <span class="corner corner-bl">✿</span>
+            <span class="corner corner-br">✿</span>
+            <p class="hero-pretitle">우리의 소중한 보물</p>
+            <h1 class="hero-name">김지유</h1>
+            <p class="hero-event">첫 번째 생일</p>
+            <div class="hero-badge">
+                <span class="badge-star">✦</span>
+                1st Birthday Party
+                <span class="badge-star">✦</span>
+            </div>
+            <p class="hero-hearts">♡ ♡ ♡</p>
+        </div>
+    </header>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <ul>
+            <li><a href="#greeting">인사말</a></li>
+            <li><a href="#info">행사정보</a></li>
+            <li><a href="#gallery">갤러리</a></li>
+            <li><a href="#location">오시는길</a></li>
+            <li><a href="#contact">연락처</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+
+        <!-- 인사말 -->
+        <section id="greeting" class="section">
+            <div class="card">
+                <h2 class="card-title">인사말</h2>
+                <div class="card-divider"></div>
+                <div class="greeting-body">
+                    <p>작고 소중한 첫 걸음을 내디딘 우리 지유가<br>어느덧 첫 생일을 맞이하게 되었습니다.</p>
+                    <p>그동안 보내주신 사랑과 관심에 감사드리며,<br>기쁨의 자리에 함께해 주시면<br>큰 힘이 될 것 같습니다.</p>
+                    <p>따뜻한 마음으로 축하해 주시면<br>감사하겠습니다.</p>
+                    <p class="greeting-sign">김성준 · 김예지 올림</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 행사정보 -->
+        <section id="info" class="section">
+            <div class="card">
+                <h2 class="card-title">행사정보</h2>
+                <div class="card-divider"></div>
+                <ul class="info-list">
+                    <li class="info-row">
+                        <div class="info-icon-box">
+                            <svg class="info-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                        </div>
+                        <div class="info-text">
+                            <span class="info-label">날짜</span>
+                            <span class="info-value">2026년 8월 1일 (토)</span>
+                            <span class="info-sub">오후 12시 30분</span>
+                        </div>
+                    </li>
+                    <li class="info-row">
+                        <div class="info-icon-box">
+                            <svg class="info-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <div class="info-text">
+                            <span class="info-label">장소</span>
+                            <span class="info-value">카페 2865</span>
+                            <span class="info-sub">경기도 고양시 덕양구 강매동 286-5</span>
+                        </div>
+                    </li>
+                    <li class="info-row">
+                        <div class="info-icon-box">
+                            <svg class="info-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <div class="info-text">
+                            <span class="info-label">부모</span>
+                            <span class="info-value">김성준 · 김예지</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 갤러리 -->
+        <section id="gallery" class="section">
+            <div class="card">
+                <h2 class="card-title">갤러리</h2>
+                <div class="card-divider"></div>
+                <p class="gallery-lead">소중한 순간들을 함께 나눠요</p>
+
+                <label class="upload-btn" for="photoInput">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    사진 업로드
+                </label>
+                <input type="file" id="photoInput" accept="image/*" multiple>
+
+                <div class="photo-grid" id="photoGrid">
+                    <div id="photoEmpty" class="photo-empty">
+                        <p>아직 사진이 없어요</p>
+                        <p class="photo-empty-sub">소중한 순간을 올려주세요</p>
+                    </div>
+                </div>
+
+                <p class="gallery-note">* 업로드한 사진은 이 기기의 브라우저에 저장됩니다</p>
+            </div>
+        </section>
+
+        <!-- 오시는길 -->
+        <section id="location" class="section">
+            <div class="card">
+                <h2 class="card-title">오시는 길</h2>
+                <div class="card-divider"></div>
+
+                <div class="venue-box">
+                    <p class="venue-name">카페 2865</p>
+                    <p class="venue-addr">경기도 고양시 덕양구 강매동 286-5</p>
+                </div>
+
+                <div class="map-wrap">
+                    <iframe
+                        src="https://maps.google.com/maps?q=경기도+고양시+덕양구+강매동+286-5&t=m&z=16&output=embed"
+                        width="100%"
+                        height="380"
+                        style="border:0"
+                        allowfullscreen
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+                <div class="map-btn-row">
+                    <a href="https://map.kakao.com/?q=고양시+덕양구+강매동+286-5" target="_blank" rel="noopener" class="map-btn btn-kakao">카카오맵</a>
+                    <a href="https://map.naver.com/v5/search/고양시+덕양구+강매동+286-5" target="_blank" rel="noopener" class="map-btn btn-naver">네이버지도</a>
+                    <a href="https://www.google.com/maps/search/고양시+덕양구+강매동+286-5" target="_blank" rel="noopener" class="map-btn btn-google">구글맵</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 연락처 -->
+        <section id="contact" class="section">
+            <div class="card">
+                <h2 class="card-title">연락처</h2>
+                <div class="card-divider"></div>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <span class="contact-role">아빠</span>
+                        <span class="contact-name">김성준</span>
+                        <a href="tel:01091246171" class="contact-tel">010-9124-6171</a>
+                    </div>
+                    <div class="contact-card">
+                        <span class="contact-role">엄마</span>
+                        <span class="contact-name">김예지</span>
+                        <a href="tel:01052482574" class="contact-tel">010-5248-2574</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="closing">
+            부디 참석하셔서 자리를 빛내주시기 바랍니다 ♡
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <p class="footer-title">김지유의 첫 번째 생일잔치</p>
+        <p class="footer-date">2026 · 08 · 01</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-bg" onclick="closeLightbox()"></div>
+        <div class="lightbox-body">
+            <button class="lb-close" onclick="closeLightbox()">✕</button>
+            <img id="lightboxImg" src="" alt="사진">
+        </div>
+    </div>
+
+    <script>
+        // IndexedDB-based photo storage
+        let db;
+
+        const dbReq = indexedDB.open('jiyu_doljanchi_v1', 1);
+        dbReq.onupgradeneeded = e => {
+            e.target.result.createObjectStore('photos', { keyPath: 'id', autoIncrement: true });
+        };
+        dbReq.onsuccess = e => {
+            db = e.target.result;
+            loadPhotos();
+        };
+        dbReq.onerror = () => console.warn('IndexedDB 초기화 실패');
+
+        function savePhoto(dataUrl, name) {
+            const tx = db.transaction('photos', 'readwrite');
+            tx.objectStore('photos').add({ dataUrl, name, ts: Date.now() });
+            tx.oncomplete = loadPhotos;
+        }
+
+        function deletePhoto(id) {
+            const tx = db.transaction('photos', 'readwrite');
+            tx.objectStore('photos').delete(id);
+            tx.oncomplete = loadPhotos;
+        }
+
+        function loadPhotos() {
+            const req = db.transaction('photos', 'readonly').objectStore('photos').getAll();
+            req.onsuccess = e => renderPhotos(e.target.result);
+        }
+
+        function renderPhotos(photos) {
+            const grid = document.getElementById('photoGrid');
+            const empty = document.getElementById('photoEmpty');
+            grid.querySelectorAll('.photo-item').forEach(el => el.remove());
+
+            if (!photos.length) {
+                empty.style.display = 'flex';
+                return;
+            }
+            empty.style.display = 'none';
+            photos.forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'photo-item';
+                const safeUrl = p.dataUrl;
+                div.innerHTML = `
+                    <img src="${safeUrl}" alt="${p.name}">
+                    <button class="photo-del" data-id="${p.id}">✕</button>
+                `;
+                div.querySelector('img').addEventListener('click', () => openLightbox(safeUrl));
+                div.querySelector('.photo-del').addEventListener('click', e => {
+                    e.stopPropagation();
+                    deletePhoto(p.id);
+                });
+                grid.appendChild(div);
+            });
+        }
+
+        document.getElementById('photoInput').addEventListener('change', function () {
+            Array.from(this.files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = ev => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const MAX = 1200;
+                        let w = img.width, h = img.height;
+                        if (w > MAX || h > MAX) {
+                            if (w >= h) { h = Math.round(h * MAX / w); w = MAX; }
+                            else { w = Math.round(w * MAX / h); h = MAX; }
+                        }
+                        canvas.width = w;
+                        canvas.height = h;
+                        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                        savePhoto(canvas.toDataURL('image/jpeg', 0.85), file.name);
+                    };
+                    img.src = ev.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+            this.value = '';
+        });
+
+        function openLightbox(src) {
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
