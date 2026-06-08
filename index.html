@@ -9,18 +9,14 @@
 </head>
 <body>
 
-    <!-- Floating sparkles background -->
-    <div class="sparkle-bg" id="sparkleBg"></div>
-
     <!-- Hero -->
     <header class="hero">
         <div class="hero-sparkle-layer" id="heroSparkleLayer"></div>
-        <div class="hero-frame">
-            <span class="corner corner-tl">✿</span>
-            <span class="corner corner-tr">✿</span>
-            <span class="corner corner-bl">✿</span>
-            <span class="corner corner-br">✿</span>
 
+        <span class="hero-corner hc-tl">✿</span>
+        <span class="hero-corner hc-tr">✿</span>
+
+        <div class="hero-content">
             <p class="hero-pretitle">우리의 소중한 보물</p>
             <h1 class="hero-name">김지유</h1>
             <p class="hero-event">첫 번째 생일</p>
@@ -29,20 +25,15 @@
                 1st Birthday Party
                 <span class="badge-star">✦</span>
             </div>
-
-            <!-- Baby photo with sparkle ring -->
-            <div class="baby-photo-wrap">
-                <span class="ps ps1">✦</span>
-                <span class="ps ps2">♡</span>
-                <span class="ps ps3">✿</span>
-                <span class="ps ps4">✦</span>
-                <span class="ps ps5">♡</span>
-                <span class="ps ps6">✿</span>
-                <img src="jiyu-face.png" alt="김지유" class="baby-photo">
-            </div>
-
-            <p class="hero-hearts">♡ ♡ ♡</p>
         </div>
+
+        <div class="hero-photo-wrap">
+            <img src="jiyu-hero.png" alt="김지유" class="hero-photo">
+        </div>
+
+        <p class="hero-hearts">♡ ♡ ♡</p>
+        <span class="hero-corner hc-bl">✿</span>
+        <span class="hero-corner hc-br">✿</span>
     </header>
 
     <!-- Navbar -->
@@ -129,13 +120,12 @@
             <div class="card">
                 <h2 class="card-title">갤러리</h2>
                 <div class="card-divider"><span class="divider-heart">♡</span></div>
-                <p class="gallery-lead">소중한 순간들을 함께 나눠요</p>
+                <p class="gallery-lead">소중한 순간들을 함께 나눠요 ♡</p>
 
-                <!-- Google Photos -->
-                <div class="gp-card">
+                <a href="https://photos.app.goo.gl/9USdjabY9yuVsLr99"
+                   target="_blank" rel="noopener" class="gp-card">
                     <div class="gp-icon-wrap">
-                        <svg viewBox="0 0 48 48" width="36" height="36">
-                            <path d="M24 4.8C13.4 4.8 4.8 13.4 4.8 24S13.4 43.2 24 43.2 43.2 34.6 43.2 24 34.6 4.8 24 4.8z" fill="none"/>
+                        <svg viewBox="0 0 48 48" width="38" height="38">
                             <path d="M24 22.4h18.4A18.4 18.4 0 0 0 24 5.6v16.8z" fill="#4285F4"/>
                             <path d="M24 22.4v18.4A18.4 18.4 0 0 0 42.4 24H24v-1.6z" fill="#34A853"/>
                             <path d="M24 22.4H5.6A18.4 18.4 0 0 0 24 40.8V22.4z" fill="#FBBC05"/>
@@ -144,34 +134,12 @@
                     </div>
                     <div class="gp-text">
                         <p class="gp-title">Google Photos 공유 앨범</p>
-                        <p class="gp-desc" id="gpDesc">사진을 추가하고 함께 공유해요</p>
+                        <p class="gp-desc">사진을 보거나 추가할 수 있어요</p>
                     </div>
-                    <a href="#" id="gpLink" class="gp-btn" target="_blank" rel="noopener">앨범 보기</a>
-                </div>
-                <p class="gp-note" id="gpNote">
-                    ※ Google Photos 공유 앨범을 만든 후 코드 상단의 <code>GOOGLE_PHOTOS_URL</code>에 링크를 붙여넣으세요
-                </p>
-
-                <div class="gallery-or"><span>또는 직접 업로드</span></div>
-
-                <label class="upload-btn" for="photoInput">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="17 8 12 3 7 8"></polyline>
-                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    <svg class="gp-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
-                    사진 업로드
-                </label>
-                <input type="file" id="photoInput" accept="image/*" multiple>
-
-                <div class="photo-grid" id="photoGrid">
-                    <div id="photoEmpty" class="photo-empty">
-                        <p>아직 사진이 없어요</p>
-                        <p class="photo-empty-sub">소중한 순간을 올려주세요 ♡</p>
-                    </div>
-                </div>
-
-                <p class="gallery-note">* 이 기기 브라우저에 저장됩니다</p>
+                </a>
             </div>
         </section>
 
@@ -234,108 +202,7 @@
         <p class="footer-date">2026 · 08 · 01</p>
     </footer>
 
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-        <div class="lightbox-bg" onclick="closeLightbox()"></div>
-        <div class="lightbox-body">
-            <button class="lb-close" onclick="closeLightbox()">✕</button>
-            <img id="lightboxImg" src="" alt="사진">
-        </div>
-    </div>
-
     <script>
-        // =====================================================
-        //  구글 포토 공유 앨범 URL을 아래에 붙여넣으세요
-        //  예) 'https://photos.app.goo.gl/xxxxxxxxxxxx'
-        const GOOGLE_PHOTOS_URL = '';
-        // =====================================================
-
-        (function setupGooglePhotos() {
-            const link = document.getElementById('gpLink');
-            const note = document.getElementById('gpNote');
-            const desc = document.getElementById('gpDesc');
-            if (GOOGLE_PHOTOS_URL) {
-                link.href = GOOGLE_PHOTOS_URL;
-                link.style.opacity = '1';
-                link.style.pointerEvents = 'auto';
-                note.style.display = 'none';
-                desc.textContent = '앨범에서 사진을 보거나 추가할 수 있어요';
-            } else {
-                link.style.opacity = '0.45';
-                link.style.pointerEvents = 'none';
-            }
-        })();
-
-        // IndexedDB photo storage
-        let db;
-        const dbReq = indexedDB.open('jiyu_doljanchi_v2', 1);
-        dbReq.onupgradeneeded = e => e.target.result.createObjectStore('photos', { keyPath: 'id', autoIncrement: true });
-        dbReq.onsuccess = e => { db = e.target.result; loadPhotos(); };
-
-        function savePhoto(dataUrl, name) {
-            const tx = db.transaction('photos', 'readwrite');
-            tx.objectStore('photos').add({ dataUrl, name, ts: Date.now() });
-            tx.oncomplete = loadPhotos;
-        }
-        function deletePhoto(id) {
-            const tx = db.transaction('photos', 'readwrite');
-            tx.objectStore('photos').delete(id);
-            tx.oncomplete = loadPhotos;
-        }
-        function loadPhotos() {
-            const req = db.transaction('photos', 'readonly').objectStore('photos').getAll();
-            req.onsuccess = e => renderPhotos(e.target.result);
-        }
-        function renderPhotos(photos) {
-            const grid = document.getElementById('photoGrid');
-            const empty = document.getElementById('photoEmpty');
-            grid.querySelectorAll('.photo-item').forEach(el => el.remove());
-            if (!photos.length) { empty.style.display = 'flex'; return; }
-            empty.style.display = 'none';
-            photos.forEach(p => {
-                const div = document.createElement('div');
-                div.className = 'photo-item';
-                div.innerHTML = `<img src="${p.dataUrl}" alt="${p.name}"><button class="photo-del">✕</button>`;
-                div.querySelector('img').addEventListener('click', () => openLightbox(p.dataUrl));
-                div.querySelector('.photo-del').addEventListener('click', e => { e.stopPropagation(); deletePhoto(p.id); });
-                grid.appendChild(div);
-            });
-        }
-        document.getElementById('photoInput').addEventListener('change', function () {
-            Array.from(this.files).forEach(file => {
-                const reader = new FileReader();
-                reader.onload = ev => {
-                    const img = new Image();
-                    img.onload = () => {
-                        const canvas = document.createElement('canvas');
-                        const MAX = 1200;
-                        let w = img.width, h = img.height;
-                        if (w > MAX || h > MAX) {
-                            if (w >= h) { h = Math.round(h * MAX / w); w = MAX; }
-                            else { w = Math.round(w * MAX / h); h = MAX; }
-                        }
-                        canvas.width = w; canvas.height = h;
-                        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-                        savePhoto(canvas.toDataURL('image/jpeg', 0.85), file.name);
-                    };
-                    img.src = ev.target.result;
-                };
-                reader.readAsDataURL(file);
-            });
-            this.value = '';
-        });
-
-        function openLightbox(src) {
-            document.getElementById('lightboxImg').src = src;
-            document.getElementById('lightbox').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('active');
-            document.body.style.overflow = '';
-        }
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', e => {
@@ -346,7 +213,7 @@
         });
 
         // Floating sparkles in hero
-        const sparkleChars = ['✦', '✧', '⋆', '✿', '♡', '❀'];
+        const sparkleChars  = ['✦', '✧', '⋆', '✿', '♡', '❀'];
         const sparkleColors = ['#c9a96e', '#f4a7b9', '#e8d0a0', '#ddb8e8', '#f0b8c8'];
         function spawnSparkle() {
             const layer = document.getElementById('heroSparkleLayer');
@@ -361,12 +228,11 @@
                 font-size:${0.5 + Math.random() * 0.85}rem;
                 animation:sparkle-float ${1.6 + Math.random() * 2}s ease-out forwards;
                 pointer-events:none;
-                z-index:0;
             `;
             layer.appendChild(el);
             setTimeout(() => el.remove(), 3800);
         }
-        setInterval(spawnSparkle, 320);
+        setInterval(spawnSparkle, 340);
 
         // Fade-in on scroll
         const io = new IntersectionObserver(entries => {
