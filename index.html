@@ -9,13 +9,18 @@
 </head>
 <body>
 
+    <!-- Floating sparkles background -->
+    <div class="sparkle-bg" id="sparkleBg"></div>
+
     <!-- Hero -->
     <header class="hero">
+        <div class="hero-sparkle-layer" id="heroSparkleLayer"></div>
         <div class="hero-frame">
             <span class="corner corner-tl">✿</span>
             <span class="corner corner-tr">✿</span>
             <span class="corner corner-bl">✿</span>
             <span class="corner corner-br">✿</span>
+
             <p class="hero-pretitle">우리의 소중한 보물</p>
             <h1 class="hero-name">김지유</h1>
             <p class="hero-event">첫 번째 생일</p>
@@ -24,6 +29,18 @@
                 1st Birthday Party
                 <span class="badge-star">✦</span>
             </div>
+
+            <!-- Baby photo with sparkle ring -->
+            <div class="baby-photo-wrap">
+                <span class="ps ps1">✦</span>
+                <span class="ps ps2">♡</span>
+                <span class="ps ps3">✿</span>
+                <span class="ps ps4">✦</span>
+                <span class="ps ps5">♡</span>
+                <span class="ps ps6">✿</span>
+                <img src="jiyu-face.png" alt="김지유" class="baby-photo">
+            </div>
+
             <p class="hero-hearts">♡ ♡ ♡</p>
         </div>
     </header>
@@ -42,10 +59,10 @@
     <main class="container">
 
         <!-- 인사말 -->
-        <section id="greeting" class="section">
+        <section id="greeting" class="section fade-in">
             <div class="card">
                 <h2 class="card-title">인사말</h2>
-                <div class="card-divider"></div>
+                <div class="card-divider"><span class="divider-heart">♡</span></div>
                 <div class="greeting-body">
                     <p>작고 소중한 첫 걸음을 내디딘 우리 지유가<br>어느덧 첫 생일을 맞이하게 되었습니다.</p>
                     <p>그동안 보내주신 사랑과 관심에 감사드리며,<br>기쁨의 자리에 함께해 주시면<br>큰 힘이 될 것 같습니다.</p>
@@ -56,10 +73,10 @@
         </section>
 
         <!-- 행사정보 -->
-        <section id="info" class="section">
+        <section id="info" class="section fade-in">
             <div class="card">
                 <h2 class="card-title">행사정보</h2>
-                <div class="card-divider"></div>
+                <div class="card-divider"><span class="divider-heart">♡</span></div>
                 <ul class="info-list">
                     <li class="info-row">
                         <div class="info-icon-box">
@@ -108,11 +125,34 @@
         </section>
 
         <!-- 갤러리 -->
-        <section id="gallery" class="section">
+        <section id="gallery" class="section fade-in">
             <div class="card">
                 <h2 class="card-title">갤러리</h2>
-                <div class="card-divider"></div>
+                <div class="card-divider"><span class="divider-heart">♡</span></div>
                 <p class="gallery-lead">소중한 순간들을 함께 나눠요</p>
+
+                <!-- Google Photos -->
+                <div class="gp-card">
+                    <div class="gp-icon-wrap">
+                        <svg viewBox="0 0 48 48" width="36" height="36">
+                            <path d="M24 4.8C13.4 4.8 4.8 13.4 4.8 24S13.4 43.2 24 43.2 43.2 34.6 43.2 24 34.6 4.8 24 4.8z" fill="none"/>
+                            <path d="M24 22.4h18.4A18.4 18.4 0 0 0 24 5.6v16.8z" fill="#4285F4"/>
+                            <path d="M24 22.4v18.4A18.4 18.4 0 0 0 42.4 24H24v-1.6z" fill="#34A853"/>
+                            <path d="M24 22.4H5.6A18.4 18.4 0 0 0 24 40.8V22.4z" fill="#FBBC05"/>
+                            <path d="M24 22.4V5.6A18.4 18.4 0 0 0 5.6 22.4H24z" fill="#EA4335"/>
+                        </svg>
+                    </div>
+                    <div class="gp-text">
+                        <p class="gp-title">Google Photos 공유 앨범</p>
+                        <p class="gp-desc" id="gpDesc">사진을 추가하고 함께 공유해요</p>
+                    </div>
+                    <a href="#" id="gpLink" class="gp-btn" target="_blank" rel="noopener">앨범 보기</a>
+                </div>
+                <p class="gp-note" id="gpNote">
+                    ※ Google Photos 공유 앨범을 만든 후 코드 상단의 <code>GOOGLE_PHOTOS_URL</code>에 링크를 붙여넣으세요
+                </p>
+
+                <div class="gallery-or"><span>또는 직접 업로드</span></div>
 
                 <label class="upload-btn" for="photoInput">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
@@ -127,19 +167,19 @@
                 <div class="photo-grid" id="photoGrid">
                     <div id="photoEmpty" class="photo-empty">
                         <p>아직 사진이 없어요</p>
-                        <p class="photo-empty-sub">소중한 순간을 올려주세요</p>
+                        <p class="photo-empty-sub">소중한 순간을 올려주세요 ♡</p>
                     </div>
                 </div>
 
-                <p class="gallery-note">* 업로드한 사진은 이 기기의 브라우저에 저장됩니다</p>
+                <p class="gallery-note">* 이 기기 브라우저에 저장됩니다</p>
             </div>
         </section>
 
         <!-- 오시는길 -->
-        <section id="location" class="section">
+        <section id="location" class="section fade-in">
             <div class="card">
                 <h2 class="card-title">오시는 길</h2>
-                <div class="card-divider"></div>
+                <div class="card-divider"><span class="divider-heart">♡</span></div>
 
                 <div class="venue-box">
                     <p class="venue-name">카페 2865</p>
@@ -149,11 +189,8 @@
                 <div class="map-wrap">
                     <iframe
                         src="https://maps.google.com/maps?q=경기도+고양시+덕양구+강매동+286-5&t=m&z=16&output=embed"
-                        width="100%"
-                        height="380"
-                        style="border:0"
-                        allowfullscreen
-                        loading="lazy"
+                        width="100%" height="380" style="border:0"
+                        allowfullscreen loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>
@@ -167,10 +204,10 @@
         </section>
 
         <!-- 연락처 -->
-        <section id="contact" class="section">
+        <section id="contact" class="section fade-in">
             <div class="card">
                 <h2 class="card-title">연락처</h2>
-                <div class="card-divider"></div>
+                <div class="card-divider"><span class="divider-heart">♡</span></div>
                 <div class="contact-grid">
                     <div class="contact-card">
                         <span class="contact-role">아빠</span>
@@ -207,63 +244,63 @@
     </div>
 
     <script>
-        // IndexedDB-based photo storage
-        let db;
+        // =====================================================
+        //  구글 포토 공유 앨범 URL을 아래에 붙여넣으세요
+        //  예) 'https://photos.app.goo.gl/xxxxxxxxxxxx'
+        const GOOGLE_PHOTOS_URL = '';
+        // =====================================================
 
-        const dbReq = indexedDB.open('jiyu_doljanchi_v1', 1);
-        dbReq.onupgradeneeded = e => {
-            e.target.result.createObjectStore('photos', { keyPath: 'id', autoIncrement: true });
-        };
-        dbReq.onsuccess = e => {
-            db = e.target.result;
-            loadPhotos();
-        };
-        dbReq.onerror = () => console.warn('IndexedDB 초기화 실패');
+        (function setupGooglePhotos() {
+            const link = document.getElementById('gpLink');
+            const note = document.getElementById('gpNote');
+            const desc = document.getElementById('gpDesc');
+            if (GOOGLE_PHOTOS_URL) {
+                link.href = GOOGLE_PHOTOS_URL;
+                link.style.opacity = '1';
+                link.style.pointerEvents = 'auto';
+                note.style.display = 'none';
+                desc.textContent = '앨범에서 사진을 보거나 추가할 수 있어요';
+            } else {
+                link.style.opacity = '0.45';
+                link.style.pointerEvents = 'none';
+            }
+        })();
+
+        // IndexedDB photo storage
+        let db;
+        const dbReq = indexedDB.open('jiyu_doljanchi_v2', 1);
+        dbReq.onupgradeneeded = e => e.target.result.createObjectStore('photos', { keyPath: 'id', autoIncrement: true });
+        dbReq.onsuccess = e => { db = e.target.result; loadPhotos(); };
 
         function savePhoto(dataUrl, name) {
             const tx = db.transaction('photos', 'readwrite');
             tx.objectStore('photos').add({ dataUrl, name, ts: Date.now() });
             tx.oncomplete = loadPhotos;
         }
-
         function deletePhoto(id) {
             const tx = db.transaction('photos', 'readwrite');
             tx.objectStore('photos').delete(id);
             tx.oncomplete = loadPhotos;
         }
-
         function loadPhotos() {
             const req = db.transaction('photos', 'readonly').objectStore('photos').getAll();
             req.onsuccess = e => renderPhotos(e.target.result);
         }
-
         function renderPhotos(photos) {
             const grid = document.getElementById('photoGrid');
             const empty = document.getElementById('photoEmpty');
             grid.querySelectorAll('.photo-item').forEach(el => el.remove());
-
-            if (!photos.length) {
-                empty.style.display = 'flex';
-                return;
-            }
+            if (!photos.length) { empty.style.display = 'flex'; return; }
             empty.style.display = 'none';
             photos.forEach(p => {
                 const div = document.createElement('div');
                 div.className = 'photo-item';
-                const safeUrl = p.dataUrl;
-                div.innerHTML = `
-                    <img src="${safeUrl}" alt="${p.name}">
-                    <button class="photo-del" data-id="${p.id}">✕</button>
-                `;
-                div.querySelector('img').addEventListener('click', () => openLightbox(safeUrl));
-                div.querySelector('.photo-del').addEventListener('click', e => {
-                    e.stopPropagation();
-                    deletePhoto(p.id);
-                });
+                div.innerHTML = `<img src="${p.dataUrl}" alt="${p.name}"><button class="photo-del">✕</button>`;
+                div.querySelector('img').addEventListener('click', () => openLightbox(p.dataUrl));
+                div.querySelector('.photo-del').addEventListener('click', e => { e.stopPropagation(); deletePhoto(p.id); });
                 grid.appendChild(div);
             });
         }
-
         document.getElementById('photoInput').addEventListener('change', function () {
             Array.from(this.files).forEach(file => {
                 const reader = new FileReader();
@@ -277,8 +314,7 @@
                             if (w >= h) { h = Math.round(h * MAX / w); w = MAX; }
                             else { w = Math.round(w * MAX / h); h = MAX; }
                         }
-                        canvas.width = w;
-                        canvas.height = h;
+                        canvas.width = w; canvas.height = h;
                         canvas.getContext('2d').drawImage(img, 0, 0, w, h);
                         savePhoto(canvas.toDataURL('image/jpeg', 0.85), file.name);
                     };
@@ -294,23 +330,49 @@
             document.getElementById('lightbox').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
-
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
             document.body.style.overflow = '';
         }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') closeLightbox();
-        });
-
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', e => {
                 e.preventDefault();
-                const target = document.querySelector(a.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) t.scrollIntoView({ behavior: 'smooth' });
             });
         });
+
+        // Floating sparkles in hero
+        const sparkleChars = ['✦', '✧', '⋆', '✿', '♡', '❀'];
+        const sparkleColors = ['#c9a96e', '#f4a7b9', '#e8d0a0', '#ddb8e8', '#f0b8c8'];
+        function spawnSparkle() {
+            const layer = document.getElementById('heroSparkleLayer');
+            if (!layer) return;
+            const el = document.createElement('span');
+            el.textContent = sparkleChars[Math.floor(Math.random() * sparkleChars.length)];
+            el.style.cssText = `
+                position:absolute;
+                left:${Math.random() * 100}%;
+                bottom:0;
+                color:${sparkleColors[Math.floor(Math.random() * sparkleColors.length)]};
+                font-size:${0.5 + Math.random() * 0.85}rem;
+                animation:sparkle-float ${1.6 + Math.random() * 2}s ease-out forwards;
+                pointer-events:none;
+                z-index:0;
+            `;
+            layer.appendChild(el);
+            setTimeout(() => el.remove(), 3800);
+        }
+        setInterval(spawnSparkle, 320);
+
+        // Fade-in on scroll
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
     </script>
 </body>
 </html>
