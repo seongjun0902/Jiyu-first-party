@@ -142,13 +142,18 @@ body {
     animation-delay: 0.3s;
 }
 
-.hero-photo {
-    width: 100%;
-    display: block;
-    /* warm glow that echoes the hero gradient */
-    filter:
-        drop-shadow(-6px -12px 36px rgba(254, 232, 208, 0.75))
-        drop-shadow(4px 6px 20px rgba(201, 169, 110, 0.18));
+.hero-photo{
+    width:100%;
+    display:block;
+
+    border-radius:32px;
+    border:8px solid rgba(255,255,255,.85);
+
+    box-shadow:
+        0 20px 40px rgba(248,184,201,.25),
+        0 10px 20px rgba(0,0,0,.05);
+
+    transform:rotate(-1deg);
 }
 
 /* ── NAVBAR ── */
