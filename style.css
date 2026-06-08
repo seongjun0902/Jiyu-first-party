@@ -284,33 +284,67 @@ body {
 .info-value { font-size: 1.03rem; font-weight: 600; color: var(--text); }
 .info-sub   { font-size: 0.87rem; color: var(--text-mid); }
 
-/* ── GALLERY – Google Photos only ── */
+/* ── GALLERY ── */
 .gallery-lead {
     text-align: center;
     color: var(--text-mid);
     font-size: 0.93rem;
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 }
 
-.gp-card {
-    display: flex; align-items: center; gap: 14px;
-    background: linear-gradient(135deg, #e8f4ff 0%, #f5f0ff 100%);
-    border: 1px solid #c2d8f8;
-    border-radius: 20px;
-    padding: 22px 20px;
+/* Photo grid */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.photo-item {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    box-shadow: 0 3px 16px var(--shadow), 0 1px 6px var(--shadow-pk);
+    cursor: pointer;
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+.photo-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 28px var(--shadow-pk);
+}
+.photo-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s;
+}
+.photo-item:hover img { transform: scale(1.06); }
+
+/* View more button */
+.gp-more-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #e8f4ff, #f0f4ff);
+    border: 1.5px solid #c2d8f8;
+    border-radius: 16px;
+    color: #1a73e8;
+    font-size: 0.92rem;
+    font-weight: 500;
+    font-family: inherit;
     text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 3px 18px rgba(66, 133, 244, 0.09);
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 2px 12px rgba(66, 133, 244, 0.1);
 }
-.gp-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 28px rgba(66, 133, 244, 0.16);
+.gp-more-btn:hover {
+    background: linear-gradient(135deg, #d8ecff, #e8eeff);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(66, 133, 244, 0.18);
 }
-.gp-icon-wrap { flex-shrink: 0; }
-.gp-text { flex: 1; }
-.gp-title { font-size: 0.97rem; font-weight: 600; color: #1a73e8; margin-bottom: 3px; }
-.gp-desc  { font-size: 0.82rem; color: #5f6368; }
-.gp-arrow { color: #1a73e8; flex-shrink: 0; }
 
 /* ── LOCATION ── */
 .venue-box { text-align: center; margin-bottom: 20px; }
@@ -361,6 +395,15 @@ body {
 .footer-title { font-size: 0.9rem; font-weight: 500; letter-spacing: 0.09em; margin-bottom: 7px; }
 .footer-date  { font-size: 0.8rem; opacity: 0.5; letter-spacing: 0.24em; }
 
+/* ── LIGHTBOX ── */
+.lightbox { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; }
+.lightbox.active { display: flex; }
+.lightbox-bg { position: absolute; inset: 0; background: rgba(0,0,0,0.9); }
+.lightbox-body { position: relative; z-index: 1; max-width: 92vw; max-height: 92vh; }
+.lightbox-body img { max-width: 100%; max-height: 90vh; display: block; border-radius: 12px; box-shadow: 0 4px 60px rgba(0,0,0,0.5); }
+.lb-close { position: absolute; top: -42px; right: 0; background: none; border: none; color: rgba(255,255,255,0.8); font-size: 1.3rem; cursor: pointer; padding: 4px 10px; transition: color 0.2s; }
+.lb-close:hover { color: #fff; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 600px) {
     .hero-content   { padding: 0 16px; }
@@ -372,5 +415,5 @@ body {
     .contact-grid   { grid-template-columns: 1fr; }
     .navbar a       { padding: 11px 11px; font-size: 0.82rem; }
     .map-wrap       { height: 260px; }
-    .gp-card        { gap: 10px; padding: 18px 14px; }
+    .photo-grid     { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 }

@@ -122,26 +122,41 @@
                 <div class="card-divider"><span class="divider-heart">♡</span></div>
                 <p class="gallery-lead">소중한 순간들을 함께 나눠요 ♡</p>
 
+                <!-- Photo grid -->
+                <div class="photo-grid" id="photoGrid">
+                    <div class="photo-item" onclick="openLightbox('photos/photo1.jpg')">
+                        <img src="photos/photo1.jpg" alt="김지유" loading="lazy">
+                    </div>
+                    <div class="photo-item" onclick="openLightbox('photos/photo2.jpg')">
+                        <img src="photos/photo2.jpg" alt="김지유" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- View more → Google Photos -->
                 <a href="https://photos.app.goo.gl/9USdjabY9yuVsLr99"
-                   target="_blank" rel="noopener" class="gp-card">
-                    <div class="gp-icon-wrap">
-                        <svg viewBox="0 0 48 48" width="38" height="38">
-                            <path d="M24 22.4h18.4A18.4 18.4 0 0 0 24 5.6v16.8z" fill="#4285F4"/>
-                            <path d="M24 22.4v18.4A18.4 18.4 0 0 0 42.4 24H24v-1.6z" fill="#34A853"/>
-                            <path d="M24 22.4H5.6A18.4 18.4 0 0 0 24 40.8V22.4z" fill="#FBBC05"/>
-                            <path d="M24 22.4V5.6A18.4 18.4 0 0 0 5.6 22.4H24z" fill="#EA4335"/>
-                        </svg>
-                    </div>
-                    <div class="gp-text">
-                        <p class="gp-title">Google Photos 공유 앨범</p>
-                        <p class="gp-desc">사진을 보거나 추가할 수 있어요</p>
-                    </div>
-                    <svg class="gp-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                   target="_blank" rel="noopener" class="gp-more-btn">
+                    <svg viewBox="0 0 48 48" width="20" height="20" style="flex-shrink:0">
+                        <path d="M24 22.4h18.4A18.4 18.4 0 0 0 24 5.6v16.8z" fill="#4285F4"/>
+                        <path d="M24 22.4v18.4A18.4 18.4 0 0 0 42.4 24H24v-1.6z" fill="#34A853"/>
+                        <path d="M24 22.4H5.6A18.4 18.4 0 0 0 24 40.8V22.4z" fill="#FBBC05"/>
+                        <path d="M24 22.4V5.6A18.4 18.4 0 0 0 5.6 22.4H24z" fill="#EA4335"/>
+                    </svg>
+                    Google Photos에서 더 보기
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="flex-shrink:0">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
                 </a>
             </div>
         </section>
+
+        <!-- Lightbox -->
+        <div class="lightbox" id="lightbox">
+            <div class="lightbox-bg" onclick="closeLightbox()"></div>
+            <div class="lightbox-body">
+                <button class="lb-close" onclick="closeLightbox()">✕</button>
+                <img id="lightboxImg" src="" alt="사진">
+            </div>
+        </div>
 
         <!-- 오시는길 -->
         <section id="location" class="section fade-in">
@@ -203,6 +218,18 @@
     </footer>
 
     <script>
+        // Lightbox
+        function openLightbox(src) {
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', e => {
