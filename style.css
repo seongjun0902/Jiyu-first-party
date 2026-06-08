@@ -1,21 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&display=swap');
 
 :root {
-    --bg:         #fdf8f2;
-    --hero-1:     #fef3e8;
-    --hero-2:     #fde5d0;
-    --card-bg:    #fffdf9;
-    --text:       #4a3728;
-    --text-mid:   #7a6354;
-    --text-light: #a89080;
-    --gold:       #c9a96e;
-    --gold-light: #eddcb8;
-    --pink:       #f4a7b9;
-    --pink-light: #fce8ef;
-    --pink-mid:   #e8c4ce;
-    --border:     #eddccc;
-    --shadow:     rgba(74, 55, 40, 0.07);
-    --shadow-pk:  rgba(244, 167, 185, 0.14);
+    --bg:         #fffaf8;
+    --hero-1:     #fff5f7;
+    --hero-2:     #ffe9ef;
+
+    --card-bg:    #ffffff;
+
+    --text:       #5b4d47;
+    --text-mid:   #8a7468;
+    --text-light: #b39d92;
+
+    --gold:       #d9b48f;
+    --gold-light: #f6e5d5;
+
+    --pink:       #f8b8c9;
+    --pink-light: #fff1f5;
+    --pink-mid:   #ffd7e2;
+
+    --border:     #ffe6ee;
+
+    --shadow:     rgba(0,0,0,.05);
+    --shadow-pk:  rgba(248,184,201,.18);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
