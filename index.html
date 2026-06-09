@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>김지유 첫 번째 생일잔치</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Gothic:wght@400;700&family=Gowun+Dodum&family=Gamja+Flower&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,25 +12,21 @@
     <!-- Hero -->
     <header class="hero">
         <div class="hero-sparkle-layer" id="heroSparkleLayer"></div>
-
         <span class="hero-corner hc-tl">✿</span>
         <span class="hero-corner hc-tr">✿</span>
-
         <div class="hero-content">
-            <p class="hero-pretitle">우리의 소중한 보물</p>
-            <h1 class="hero-name">김지유</h1>
-            <p class="hero-event">첫 번째 생일</p>
+            <p class="hero-pretitle" id="txt-heroPretitle">우리의 소중한 보물</p>
+            <h1 class="hero-name" id="txt-heroName">김지유</h1>
+            <p class="hero-event" id="txt-heroEvent">첫 번째 생일</p>
             <div class="hero-badge">
                 <span class="badge-star">✦</span>
                 1st Birthday Party
                 <span class="badge-star">✦</span>
             </div>
         </div>
-
         <div class="hero-photo-wrap">
-            <img src="jiyu-hero.png" alt="김지유" class="hero-photo">
+            <img src="jiyu-hero.png" alt="김지유" class="hero-photo" id="heroPhoto">
         </div>
-
     </header>
 
     <!-- Navbar -->
@@ -51,10 +47,10 @@
                 <h2 class="card-title">인사말</h2>
                 <div class="card-divider"><span class="divider-heart">♡</span></div>
                 <div class="greeting-body">
-                    <p>작고 소중한 첫 걸음을 내디딘 우리 지유가<br>어느덧 첫 생일을 맞이하게 되었습니다.</p>
-                    <p>그동안 보내주신 사랑과 관심에 감사드리며,<br>기쁨의 자리에 함께해 주시면<br>큰 힘이 될 것 같습니다.</p>
-                    <p>따뜻한 마음으로 축하해 주시면<br>감사하겠습니다.</p>
-                    <p class="greeting-sign">김성준 · 김예지 올림</p>
+                    <p id="txt-greetingP1">작고 소중한 첫 걸음을 내디딘 우리 지유가<br>어느덧 첫 생일을 맞이하게 되었습니다.</p>
+                    <p id="txt-greetingP2">그동안 보내주신 사랑과 관심에 감사드리며,<br>기쁨의 자리에 함께해 주시면<br>큰 힘이 될 것 같습니다.</p>
+                    <p id="txt-greetingP3">따뜻한 마음으로 축하해 주시면<br>감사하겠습니다.</p>
+                    <p class="greeting-sign" id="txt-greetingSign">김성준 · 김예지 올림</p>
                 </div>
             </div>
         </section>
@@ -76,8 +72,8 @@
                         </div>
                         <div class="info-text">
                             <span class="info-label">날짜</span>
-                            <span class="info-value">2026년 8월 1일 (토)</span>
-                            <span class="info-sub">오후 12시 30분</span>
+                            <span class="info-value" id="txt-infoDate">2026년 8월 1일 (토)</span>
+                            <span class="info-sub" id="txt-infoTime">오후 12시 30분</span>
                         </div>
                     </li>
                     <li class="info-row">
@@ -89,8 +85,8 @@
                         </div>
                         <div class="info-text">
                             <span class="info-label">장소</span>
-                            <span class="info-value">카페 2865</span>
-                            <span class="info-sub">경기도 고양시 덕양구 강매동 286-5</span>
+                            <span class="info-value" id="txt-infoVenueName">카페 2865</span>
+                            <span class="info-sub" id="txt-infoVenueAddr">경기도 고양시 덕양구 강매동 286-5</span>
                         </div>
                     </li>
                     <li class="info-row">
@@ -104,7 +100,7 @@
                         </div>
                         <div class="info-text">
                             <span class="info-label">부모</span>
-                            <span class="info-value">김성준 · 김예지</span>
+                            <span class="info-value" id="txt-infoParents">김성준 · 김예지</span>
                         </div>
                     </li>
                 </ul>
@@ -117,8 +113,6 @@
                 <h2 class="card-title">갤러리</h2>
                 <div class="card-divider"><span class="divider-heart">♡</span></div>
                 <p class="gallery-lead">소중한 순간들을 함께 나눠요 ♡</p>
-
-                <!-- Photo grid -->
                 <div class="photo-grid" id="photoGrid">
                     <div class="photo-item" onclick="openLightbox('photos/photo1.jpg')">
                         <img src="photos/photo1.jpg" alt="김지유" loading="lazy">
@@ -127,10 +121,8 @@
                         <img src="photos/photo2.jpg" alt="김지유" loading="lazy">
                     </div>
                 </div>
-
-                <!-- View more → Google Photos -->
                 <a href="https://photos.app.goo.gl/9USdjabY9yuVsLr99"
-                   target="_blank" rel="noopener" class="gp-more-btn">
+                   target="_blank" rel="noopener" class="gp-more-btn" id="gpMoreBtn">
                     view more
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15" style="flex-shrink:0">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -153,89 +145,643 @@
             <div class="card">
                 <h2 class="card-title">오시는 길</h2>
                 <div class="card-divider"><span class="divider-heart">♡</span></div>
-
                 <div class="venue-box">
-                    <p class="venue-name">카페 2865</p>
-                    <p class="venue-addr">경기도 고양시 덕양구 강매동 286-5</p>
+                    <p class="venue-name" id="loc-venueName">카페 2865</p>
+                    <p class="venue-addr" id="loc-venueAddr">경기도 고양시 덕양구 강매동 286-5</p>
                 </div>
-
                 <div class="map-wrap">
-                    <iframe
+                    <iframe id="mapIframe"
                         src="https://maps.google.com/maps?q=경기도+고양시+덕양구+강매동+286-5&t=m&z=16&output=embed"
                         width="100%" height="380" style="border:0"
                         allowfullscreen loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>
-
                 <div class="map-btn-row">
-                    <a href="https://map.kakao.com/?q=고양시+덕양구+강매동+286-5" target="_blank" rel="noopener" class="map-btn btn-kakao">카카오맵</a>
-                    <a href="https://map.naver.com/v5/search/고양시+덕양구+강매동+286-5" target="_blank" rel="noopener" class="map-btn btn-naver">네이버지도</a>
-                    <a href="https://www.google.com/maps/search/고양시+덕양구+강매동+286-5" target="_blank" rel="noopener" class="map-btn btn-google">구글맵</a>
+                    <a id="btn-kakao" href="https://map.kakao.com/?q=고양시+덕양구+강매동+286-5" target="_blank" rel="noopener" class="map-btn btn-kakao">카카오맵</a>
+                    <a id="btn-naver" href="https://map.naver.com/v5/search/고양시+덕양구+강매동+286-5" target="_blank" rel="noopener" class="map-btn btn-naver">네이버지도</a>
+                    <a id="btn-google" href="https://www.google.com/maps/search/고양시+덕양구+강매동+286-5" target="_blank" rel="noopener" class="map-btn btn-google">구글맵</a>
                 </div>
             </div>
         </section>
 
-        <div class="closing">
+        <div class="closing" id="txt-closing">
             부디 참석하셔서 자리를 빛내주시기 바랍니다 ♡
         </div>
 
     </main>
 
     <footer class="footer">
-        <p class="footer-title">김지유의 첫 번째 생일잔치</p>
-        <p class="footer-date">2026 · 08 · 01</p>
+        <p class="footer-title" id="txt-footerTitle">김지유의 첫 번째 생일잔치</p>
+        <p class="footer-date" id="txt-footerDate">2026 · 08 · 01</p>
+        <button class="admin-toggle" onclick="toggleAdmin()" title="관리자">⚙</button>
     </footer>
 
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-inner">
+
+            <!-- Login -->
+            <div id="adminLogin">
+                <div class="admin-login">
+                    <p class="admin-login-title">관리자 로그인</p>
+                    <select id="loginUser" class="admin-input">
+                        <option value="father">아빠 (father)</option>
+                        <option value="mother">엄마 (mother)</option>
+                    </select>
+                    <input type="password" id="loginPw" class="admin-input" placeholder="비밀번호"
+                           onkeydown="if(event.key==='Enter')doLogin()">
+                    <button class="admin-btn-primary" onclick="doLogin()">로그인</button>
+                    <p class="admin-login-err" id="loginErr"></p>
+                </div>
+            </div>
+
+            <!-- Tabs (shown after login) -->
+            <div id="adminTabs" style="display:none">
+                <div class="admin-tab-bar">
+                    <button class="admin-tab active" onclick="switchTab('theme',this)">테마</button>
+                    <button class="admin-tab" onclick="switchTab('font',this)">폰트</button>
+                    <button class="admin-tab" onclick="switchTab('text',this)">텍스트</button>
+                    <button class="admin-tab" onclick="switchTab('photo',this)">메인사진</button>
+                    <button class="admin-tab" onclick="switchTab('gallery',this)">갤러리</button>
+                    <button class="admin-tab" onclick="switchTab('location',this)">장소</button>
+                </div>
+
+                <!-- 테마 탭 -->
+                <div class="admin-tab-content active" id="tab-theme">
+                    <p class="admin-section-label">색 테마</p>
+                    <div class="theme-grid" id="themeGrid"></div>
+                    <p class="admin-section-label" style="margin-top:20px">사진 프레임</p>
+                    <div class="frame-grid" id="frameGrid"></div>
+                </div>
+
+                <!-- 폰트 탭 -->
+                <div class="admin-tab-content" id="tab-font">
+                    <p class="admin-section-label">글자체</p>
+                    <div class="font-list" id="fontList"></div>
+                </div>
+
+                <!-- 텍스트 탭 -->
+                <div class="admin-tab-content" id="tab-text">
+                    <div class="admin-text-fields" id="textFields"></div>
+                    <button class="admin-btn-primary" onclick="saveTexts()">저장하기</button>
+                </div>
+
+                <!-- 메인사진 탭 -->
+                <div class="admin-tab-content" id="tab-photo">
+                    <p class="admin-section-label">메인 사진 교체</p>
+                    <div class="hero-preview-wrap">
+                        <img id="heroPreviewImg" src="jiyu-hero.png" alt="미리보기" class="hero-preview">
+                    </div>
+                    <label class="admin-upload-btn">
+                        사진 선택하기
+                        <input type="file" accept="image/*" id="heroFileInput" style="display:none"
+                               onchange="uploadHeroPhoto(this)">
+                    </label>
+                    <p class="admin-upload-status" id="heroUploadStatus"></p>
+                </div>
+
+                <!-- 갤러리 탭 -->
+                <div class="admin-tab-content" id="tab-gallery">
+                    <p class="admin-section-label">Google Photos 링크</p>
+                    <input type="url" id="gpUrlInput" class="admin-input"
+                           placeholder="https://photos.app.goo.gl/..." style="margin-bottom:8px">
+                    <button class="admin-btn-secondary" onclick="saveGpUrl()" style="margin-bottom:20px">저장</button>
+
+                    <p class="admin-section-label">사진 업로드</p>
+                    <label class="admin-upload-btn">
+                        사진 추가하기 (여러 장 가능)
+                        <input type="file" accept="image/*" multiple id="galleryFileInput"
+                               style="display:none" onchange="uploadGalleryPhotos(this)">
+                    </label>
+                    <p class="admin-upload-status" id="galleryUploadStatus"></p>
+                    <div class="gallery-manage-list" id="galleryManageList"></div>
+                </div>
+
+                <!-- 장소 탭 -->
+                <div class="admin-tab-content" id="tab-location">
+                    <div class="admin-text-fields" id="locationFields"></div>
+                    <button class="admin-btn-primary" onclick="saveLocation()">저장하기</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
     <script>
-        // Lightbox
-        function openLightbox(src) {
-            document.getElementById('lightboxImg').src = src;
-            document.getElementById('lightbox').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('active');
-            document.body.style.overflow = '';
-        }
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+    /* ── CONFIG ── */
+    firebase.initializeApp({
+        apiKey: "AIzaSyDvAxHG2gOupgMn_vUgsFX4M3pa5gStTDY",
+        authDomain: "first-party-756ff.firebaseapp.com",
+        databaseURL: "https://first-party-756ff-default-rtdb.firebaseio.com",
+        projectId: "first-party-756ff",
+        storageBucket: "first-party-756ff.firebasestorage.app",
+        messagingSenderId: "855738572188",
+        appId: "1:855738572188:web:f9e2d11a483a081017fc59"
+    });
+    const db = firebase.database();
+    const CLD_CLOUD  = 'dxm5dpptx';
+    const CLD_PRESET = 'jelly11';
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', e => {
-                e.preventDefault();
-                const t = document.querySelector(a.getAttribute('href'));
-                if (t) t.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
+    /* ── DEFAULTS ── */
+    const DEFAULTS = {
+        settings: {
+            theme: 'A', font: 'A', frame: 'A',
+            googlePhotosUrl: 'https://photos.app.goo.gl/9USdjabY9yuVsLr99',
+            heroImageUrl: ''
+        },
+        texts: {
+            heroPretitle: '우리의 소중한 보물',
+            heroName: '김지유',
+            heroEvent: '첫 번째 생일',
+            greetingP1: '작고 소중한 첫 걸음을 내디딘 우리 지유가\n어느덧 첫 생일을 맞이하게 되었습니다.',
+            greetingP2: '그동안 보내주신 사랑과 관심에 감사드리며,\n기쁨의 자리에 함께해 주시면\n큰 힘이 될 것 같습니다.',
+            greetingP3: '따뜻한 마음으로 축하해 주시면\n감사하겠습니다.',
+            greetingSign: '김성준 · 김예지 올림',
+            infoDate: '2026년 8월 1일 (토)',
+            infoTime: '오후 12시 30분',
+            infoVenueName: '카페 2865',
+            infoVenueAddr: '경기도 고양시 덕양구 강매동 286-5',
+            infoParents: '김성준 · 김예지',
+            closing: '부디 참석하셔서 자리를 빛내주시기 바랍니다 ♡',
+            footerTitle: '김지유의 첫 번째 생일잔치',
+            footerDate: '2026 · 08 · 01'
+        },
+        location: {
+            venueName: '카페 2865',
+            venueAddr: '경기도 고양시 덕양구 강매동 286-5',
+            mapQuery: '경기도+고양시+덕양구+강매동+286-5',
+            kakaoUrl: 'https://map.kakao.com/?q=고양시+덕양구+강매동+286-5',
+            naverUrl: 'https://map.naver.com/v5/search/고양시+덕양구+강매동+286-5',
+            googleUrl: 'https://www.google.com/maps/search/고양시+덕양구+강매동+286-5'
+        }
+    };
 
-        // Floating sparkles in hero
-        const sparkleChars  = ['✦', '✧', '⋆', '✿', '♡', '❀'];
-        const sparkleColors = ['#c9a96e', '#f4a7b9', '#e8d0a0', '#ddb8e8', '#f0b8c8'];
-        function spawnSparkle() {
-            const layer = document.getElementById('heroSparkleLayer');
+    /* ── THEMES ── */
+    const THEMES = {
+        A: { name: '베이지+금', sw: ['#fde5d0','#c9a96e'],
+             v: {'--bg':'#fdf8f2','--hero-1':'#fef3e8','--hero-2':'#fde5d0','--card-bg':'#fffdf9','--text':'#4a3728','--text-mid':'#7a6354','--text-light':'#a89080','--gold':'#c9a96e','--gold-light':'#eddcb8','--pink':'#f4a7b9','--pink-light':'#fce8ef','--pink-mid':'#e8c4ce','--border':'#eddccc','--shadow':'rgba(74,55,40,0.07)','--shadow-pk':'rgba(244,167,185,0.14)'}},
+        B: { name: '핑크+하늘+민트', sw: ['#ffc8db','#7ec8e3'],
+             v: {'--bg':'#fdf0f5','--hero-1':'#ffe4ef','--hero-2':'#e8f6ff','--card-bg':'#fffafb','--text':'#3d2040','--text-mid':'#7a5080','--text-light':'#b090b8','--gold':'#e88ab0','--gold-light':'#f5c8db','--pink':'#7ec8e3','--pink-light':'#dff2f8','--pink-mid':'#b8e0ec','--border':'#f0d0e0','--shadow':'rgba(61,32,64,0.07)','--shadow-pk':'rgba(126,200,227,0.18)'}},
+        C: { name: '라벤더+로즈골드', sw: ['#d8c8f0','#c9939e'],
+             v: {'--bg':'#f7f3fc','--hero-1':'#ede5fa','--hero-2':'#faf0f5','--card-bg':'#fdfbff','--text':'#3d2855','--text-mid':'#7a608a','--text-light':'#b0a0c0','--gold':'#c9939e','--gold-light':'#e8c8cc','--pink':'#c3a8e8','--pink-light':'#ede3fa','--pink-mid':'#d8c8f0','--border':'#e0d0f0','--shadow':'rgba(61,40,85,0.07)','--shadow-pk':'rgba(195,168,232,0.18)'}},
+        D: { name: '민트+코랄', sw: ['#a8e8cc','#ff8070'],
+             v: {'--bg':'#f3fdf8','--hero-1':'#e0faf0','--hero-2':'#fff3f0','--card-bg':'#fafffe','--text':'#1a4035','--text-mid':'#4a7065','--text-light':'#88aaa0','--gold':'#ff8070','--gold-light':'#ffc8c0','--pink':'#60c8a0','--pink-light':'#d0f5e8','--pink-mid':'#a8e8cc','--border':'#c0eedd','--shadow':'rgba(26,64,53,0.07)','--shadow-pk':'rgba(96,200,160,0.18)'}},
+        E: { name: '피치+아이보리', sw: ['#f8c890','#d4882a'],
+             v: {'--bg':'#fff9f3','--hero-1':'#fff0e3','--hero-2':'#ffe5d0','--card-bg':'#fffdf9','--text':'#5a3015','--text-mid':'#8a5835','--text-light':'#c0905a','--gold':'#d4882a','--gold-light':'#f5d8a0','--pink':'#f0a060','--pink-light':'#ffe8d0','--pink-mid':'#f8c890','--border':'#f0d8b8','--shadow':'rgba(90,48,21,0.08)','--shadow-pk':'rgba(240,160,96,0.18)'}}
+    };
+
+    /* ── FONTS ── */
+    const FONTS = {
+        A: { label: '노토 세리프 (기본)', family: "'Noto Serif KR', serif" },
+        B: { label: '나눔 명조',          family: "'Nanum Myeongjo', serif" },
+        C: { label: '나눔 고딕',          family: "'Nanum Gothic', sans-serif" },
+        D: { label: '고운 돋움',          family: "'Gowun Dodum', sans-serif" },
+        E: { label: '감자 꽃',            family: "'Gamja Flower', cursive" }
+    };
+
+    /* ── FRAMES ── */
+    const FRAMES = {
+        A: '기본 (둥근 사각형)',
+        B: '원형',
+        C: '블러 테두리',
+        D: '버블 효과',
+        E: '테마 컬러 테두리'
+    };
+
+    /* ── STATE ── */
+    let appState = {
+        settings: { ...DEFAULTS.settings },
+        texts:    { ...DEFAULTS.texts },
+        location: { ...DEFAULTS.location },
+        photos:   [],
+        isAdmin:  false
+    };
+    let bubbleTimer = null;
+
+    /* ── APPLY FUNCTIONS ── */
+    function applyTheme(id) {
+        const t = THEMES[id]; if (!t) return;
+        for (const [k, v] of Object.entries(t.v))
+            document.documentElement.style.setProperty(k, v);
+    }
+
+    function applyFont(id) {
+        const f = FONTS[id]; if (!f) return;
+        document.body.style.fontFamily = f.family;
+    }
+
+    function applyFrame(id) {
+        const grid = document.getElementById('photoGrid');
+        if (!grid) return;
+        grid.className = 'photo-grid' + (id !== 'A' ? ' frame-' + id.toLowerCase() : '');
+        const existing = document.getElementById('bubbleLayer');
+        if (id === 'D') {
+            if (!existing) {
+                const layer = document.createElement('div');
+                layer.id = 'bubbleLayer';
+                layer.className = 'bubble-layer';
+                grid.appendChild(layer);
+            }
+            startBubbles();
+        } else {
+            stopBubbles();
+            if (existing) existing.remove();
+        }
+    }
+
+    function startBubbles() {
+        stopBubbles();
+        bubbleTimer = setInterval(() => {
+            const layer = document.getElementById('bubbleLayer');
             if (!layer) return;
-            const el = document.createElement('span');
-            el.textContent = sparkleChars[Math.floor(Math.random() * sparkleChars.length)];
-            el.style.cssText = `
-                position:absolute;
-                left:${Math.random() * 100}%;
-                bottom:0;
-                color:${sparkleColors[Math.floor(Math.random() * sparkleColors.length)]};
-                font-size:${0.5 + Math.random() * 0.85}rem;
-                animation:sparkle-float ${1.6 + Math.random() * 2}s ease-out forwards;
-                pointer-events:none;
-            `;
-            layer.appendChild(el);
-            setTimeout(() => el.remove(), 3800);
-        }
-        setInterval(spawnSparkle, 340);
+            const b = document.createElement('span');
+            b.className = 'bubble-particle';
+            const sz = 8 + Math.random() * 20;
+            b.style.cssText = `left:${Math.random()*100}%;width:${sz}px;height:${sz}px;animation-duration:${2.8+Math.random()*2.5}s;opacity:${0.12+Math.random()*0.25}`;
+            layer.appendChild(b);
+            setTimeout(() => b.remove(), 5400);
+        }, 320);
+    }
 
-        // Fade-in on scroll
-        const io = new IntersectionObserver(entries => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.08 });
-        document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+    function stopBubbles() {
+        if (bubbleTimer) { clearInterval(bubbleTimer); bubbleTimer = null; }
+    }
+
+    function applyTexts(texts) {
+        ['heroPretitle','heroName','heroEvent','greetingSign','infoDate','infoTime',
+         'infoVenueName','infoVenueAddr','infoParents','footerTitle','footerDate'].forEach(k => {
+            const el = document.getElementById('txt-' + k);
+            if (el && texts[k] != null) el.textContent = texts[k];
+        });
+        ['greetingP1','greetingP2','greetingP3'].forEach(k => {
+            const el = document.getElementById('txt-' + k);
+            if (el && texts[k] != null) el.innerHTML = texts[k].replace(/\n/g, '<br>');
+        });
+        const cl = document.getElementById('txt-closing');
+        if (cl && texts.closing != null) cl.textContent = texts.closing;
+    }
+
+    function applyHeroImage(url) {
+        if (!url) return;
+        document.getElementById('heroPhoto').src = url;
+        const p = document.getElementById('heroPreviewImg');
+        if (p) p.src = url;
+    }
+
+    function applyGpUrl(url) {
+        if (!url) return;
+        document.getElementById('gpMoreBtn').href = url;
+    }
+
+    function applyGallery(photos) {
+        const grid = document.getElementById('photoGrid');
+        grid.innerHTML = '';
+        const list = photos && photos.length ? photos : null;
+        if (!list) {
+            ['photos/photo1.jpg','photos/photo2.jpg'].forEach(src =>
+                grid.appendChild(makePhotoItem(src)));
+        } else {
+            list.forEach(p => grid.appendChild(makePhotoItem(p.url)));
+        }
+        applyFrame(appState.settings.frame || 'A');
+    }
+
+    function makePhotoItem(url) {
+        const d = document.createElement('div');
+        d.className = 'photo-item';
+        d.onclick = () => openLightbox(url);
+        const img = document.createElement('img');
+        img.src = url; img.alt = '김지유'; img.loading = 'lazy';
+        d.appendChild(img);
+        return d;
+    }
+
+    function applyLocation(loc) {
+        const set  = (id, v) => { const el = document.getElementById(id); if (el && v) el.textContent = v; };
+        const href = (id, v) => { const el = document.getElementById(id); if (el && v) el.href = v; };
+        set('loc-venueName', loc.venueName);
+        set('loc-venueAddr', loc.venueAddr);
+        href('btn-kakao', loc.kakaoUrl);
+        href('btn-naver', loc.naverUrl);
+        href('btn-google', loc.googleUrl);
+        if (loc.mapQuery) {
+            document.getElementById('mapIframe').src =
+                'https://maps.google.com/maps?q=' + encodeURIComponent(loc.mapQuery) + '&t=m&z=16&output=embed';
+        }
+    }
+
+    /* ── FIREBASE LOAD ── */
+    function loadFromFirebase() {
+        db.ref('/').on('value', snap => {
+            const d = snap.val() || {};
+
+            appState.settings = { ...DEFAULTS.settings, ...(d.settings || {}) };
+            applyTheme(appState.settings.theme);
+            applyFont(appState.settings.font);
+            applyHeroImage(appState.settings.heroImageUrl);
+            applyGpUrl(appState.settings.googlePhotosUrl);
+
+            appState.texts = { ...DEFAULTS.texts, ...(d.texts || {}) };
+            applyTexts(appState.texts);
+
+            const raw = d.gallery && d.gallery.photos;
+            appState.photos = raw
+                ? Object.entries(raw).map(([key, val]) => ({ key, ...val }))
+                : [];
+            applyGallery(appState.photos);
+
+            appState.location = { ...DEFAULTS.location, ...(d.location || {}) };
+            applyLocation(appState.location);
+
+            if (appState.isAdmin) refreshAdminUI();
+        });
+    }
+
+    /* ── ADMIN TOGGLE ── */
+    let adminOpen = false;
+    function toggleAdmin() {
+        adminOpen = !adminOpen;
+        document.getElementById('adminPanel').classList.toggle('open', adminOpen);
+    }
+
+    /* ── LOGIN ── */
+    function doLogin() {
+        const u = document.getElementById('loginUser').value;
+        const p = document.getElementById('loginPw').value;
+        if ((u === 'father' || u === 'mother') && p === '20221120') {
+            appState.isAdmin = true;
+            document.getElementById('adminLogin').style.display = 'none';
+            document.getElementById('adminTabs').style.display = 'block';
+            buildAdminUI();
+        } else {
+            document.getElementById('loginErr').textContent = '비밀번호가 틀렸습니다.';
+        }
+    }
+
+    function switchTab(id, btn) {
+        document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.admin-tab').forEach(el => el.classList.remove('active'));
+        document.getElementById('tab-' + id).classList.add('active');
+        if (btn) btn.classList.add('active');
+    }
+
+    /* ── BUILD ADMIN UI ── */
+    function buildAdminUI() {
+        buildThemeGrid();
+        buildFrameGrid();
+        buildFontList();
+        buildTextFields();
+        buildLocationFields();
+        refreshGalleryManage();
+        const gi = document.getElementById('gpUrlInput');
+        if (gi) gi.value = appState.settings.googlePhotosUrl || '';
+    }
+
+    function refreshAdminUI() {
+        if (!appState.isAdmin) return;
+        refreshGalleryManage();
+        const gi = document.getElementById('gpUrlInput');
+        if (gi) gi.value = appState.settings.googlePhotosUrl || '';
+    }
+
+    function buildThemeGrid() {
+        const g = document.getElementById('themeGrid'); g.innerHTML = '';
+        for (const [id, t] of Object.entries(THEMES)) {
+            const btn = document.createElement('button');
+            btn.className = 'theme-swatch' + (appState.settings.theme === id ? ' active' : '');
+            btn.innerHTML = `<span style="background:${t.sw[0]}"></span><span style="background:${t.sw[1]}"></span><span class="theme-name">${t.name}</span>`;
+            btn.onclick = () => {
+                applyTheme(id);
+                db.ref('settings/theme').set(id);
+                g.querySelectorAll('.theme-swatch').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            };
+            g.appendChild(btn);
+        }
+    }
+
+    function buildFrameGrid() {
+        const g = document.getElementById('frameGrid'); g.innerHTML = '';
+        for (const [id, label] of Object.entries(FRAMES)) {
+            const btn = document.createElement('button');
+            btn.className = 'frame-option' + (appState.settings.frame === id ? ' active' : '');
+            btn.textContent = label;
+            btn.onclick = () => {
+                applyFrame(id);
+                db.ref('settings/frame').set(id);
+                g.querySelectorAll('.frame-option').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            };
+            g.appendChild(btn);
+        }
+    }
+
+    function buildFontList() {
+        const g = document.getElementById('fontList'); g.innerHTML = '';
+        for (const [id, f] of Object.entries(FONTS)) {
+            const btn = document.createElement('button');
+            btn.className = 'font-option' + (appState.settings.font === id ? ' active' : '');
+            btn.style.fontFamily = f.family;
+            btn.innerHTML = `<span class="font-label">${f.label}</span><span class="font-sample">가나다 ABC 123</span>`;
+            btn.onclick = () => {
+                applyFont(id);
+                db.ref('settings/font').set(id);
+                g.querySelectorAll('.font-option').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            };
+            g.appendChild(btn);
+        }
+    }
+
+    function buildTextFields() {
+        const c = document.getElementById('textFields'); c.innerHTML = '';
+        [
+            {k:'heroPretitle', l:'상단 문구'},
+            {k:'heroName',     l:'이름'},
+            {k:'heroEvent',    l:'행사명'},
+            {k:'greetingP1',   l:'인사말 1', multi:true},
+            {k:'greetingP2',   l:'인사말 2', multi:true},
+            {k:'greetingP3',   l:'인사말 3', multi:true},
+            {k:'greetingSign', l:'인사말 서명'},
+            {k:'infoDate',     l:'날짜'},
+            {k:'infoTime',     l:'시간'},
+            {k:'infoVenueName',l:'장소명'},
+            {k:'infoVenueAddr',l:'장소 주소'},
+            {k:'infoParents',  l:'부모 이름'},
+            {k:'closing',      l:'마무리 문구'},
+            {k:'footerTitle',  l:'푸터 제목'},
+            {k:'footerDate',   l:'푸터 날짜'}
+        ].forEach(({k, l, multi}) => {
+            const wrap = document.createElement('div');
+            wrap.className = 'admin-field';
+            const lbl = document.createElement('label');
+            lbl.className = 'admin-field-label'; lbl.textContent = l;
+            const inp = multi ? Object.assign(document.createElement('textarea'), {rows:3}) : document.createElement('input');
+            inp.className = 'admin-input'; inp.dataset.key = k; inp.value = appState.texts[k] || '';
+            if (!multi) inp.type = 'text';
+            wrap.appendChild(lbl); wrap.appendChild(inp);
+            c.appendChild(wrap);
+        });
+    }
+
+    function buildLocationFields() {
+        const c = document.getElementById('locationFields'); c.innerHTML = '';
+        [
+            {k:'venueName', l:'장소명'},
+            {k:'venueAddr', l:'주소'},
+            {k:'mapQuery',  l:'지도 검색어'},
+            {k:'kakaoUrl',  l:'카카오맵 URL'},
+            {k:'naverUrl',  l:'네이버지도 URL'},
+            {k:'googleUrl', l:'구글맵 URL'}
+        ].forEach(({k, l}) => {
+            const wrap = document.createElement('div');
+            wrap.className = 'admin-field';
+            const lbl = document.createElement('label');
+            lbl.className = 'admin-field-label'; lbl.textContent = l;
+            const inp = document.createElement('input');
+            inp.type = 'text'; inp.className = 'admin-input';
+            inp.dataset.key = k; inp.value = appState.location[k] || '';
+            wrap.appendChild(lbl); wrap.appendChild(inp);
+            c.appendChild(wrap);
+        });
+    }
+
+    function refreshGalleryManage() {
+        const list = document.getElementById('galleryManageList');
+        if (!list) return;
+        list.innerHTML = '';
+        if (!appState.photos.length) {
+            list.innerHTML = '<p style="color:var(--text-light);font-size:0.85rem;text-align:center;padding:12px 0">업로드된 사진 없음</p>';
+            return;
+        }
+        appState.photos.forEach(p => {
+            const item = document.createElement('div');
+            item.className = 'gallery-manage-item';
+            const img = document.createElement('img'); img.src = p.url;
+            const del = document.createElement('button');
+            del.className = 'admin-btn-danger'; del.textContent = '삭제';
+            del.onclick = () => db.ref('gallery/photos/' + p.key).remove();
+            item.appendChild(img); item.appendChild(del);
+            list.appendChild(item);
+        });
+    }
+
+    /* ── SAVE FUNCTIONS ── */
+    function saveTexts() {
+        const obj = {};
+        document.querySelectorAll('#textFields [data-key]').forEach(inp => { obj[inp.dataset.key] = inp.value; });
+        db.ref('texts').update(obj).then(() => showToast('텍스트 저장 완료'));
+    }
+
+    function saveLocation() {
+        const obj = {};
+        document.querySelectorAll('#locationFields [data-key]').forEach(inp => { obj[inp.dataset.key] = inp.value; });
+        db.ref('location').update(obj).then(() => showToast('장소 정보 저장 완료'));
+    }
+
+    function saveGpUrl() {
+        const url = document.getElementById('gpUrlInput').value.trim();
+        db.ref('settings/googlePhotosUrl').set(url).then(() => showToast('링크 저장 완료'));
+    }
+
+    /* ── CLOUDINARY ── */
+    async function uploadToCloudinary(file) {
+        const fd = new FormData();
+        fd.append('file', file);
+        fd.append('upload_preset', CLD_PRESET);
+        const res = await fetch(`https://api.cloudinary.com/v1_1/${CLD_CLOUD}/image/upload`, { method:'POST', body:fd });
+        if (!res.ok) throw new Error('업로드 실패 (' + res.status + ')');
+        return (await res.json()).secure_url;
+    }
+
+    async function uploadHeroPhoto(input) {
+        const file = input.files[0]; if (!file) return;
+        const s = document.getElementById('heroUploadStatus');
+        s.textContent = '업로드 중...';
+        try {
+            const url = await uploadToCloudinary(file);
+            await db.ref('settings/heroImageUrl').set(url);
+            s.textContent = '완료!';
+            setTimeout(() => s.textContent = '', 3000);
+        } catch(e) { s.textContent = '오류: ' + e.message; }
+        input.value = '';
+    }
+
+    async function uploadGalleryPhotos(input) {
+        const files = Array.from(input.files); if (!files.length) return;
+        const s = document.getElementById('galleryUploadStatus');
+        let done = 0;
+        s.textContent = `0 / ${files.length} 업로드 중...`;
+        for (const file of files) {
+            try {
+                const url = await uploadToCloudinary(file);
+                await db.ref('gallery/photos').push({ url, addedAt: Date.now() });
+                done++;
+                s.textContent = `${done} / ${files.length} 완료`;
+            } catch(e) { s.textContent = '오류: ' + e.message; break; }
+        }
+        input.value = '';
+        setTimeout(() => s.textContent = '', 3000);
+    }
+
+    /* ── TOAST ── */
+    function showToast(msg) {
+        let t = document.getElementById('adminToast');
+        if (!t) {
+            t = document.createElement('div'); t.id = 'adminToast'; t.className = 'admin-toast';
+            document.body.appendChild(t);
+        }
+        t.textContent = msg; t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    /* ── LIGHTBOX ── */
+    function openLightbox(src) {
+        document.getElementById('lightboxImg').src = src;
+        document.getElementById('lightbox').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    /* ── SMOOTH SCROLL ── */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            const t = document.querySelector(a.getAttribute('href'));
+            if (t) t.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    /* ── SPARKLES ── */
+    const SC = ['✦','✧','⋆','✿','♡','❀'];
+    const SK = ['#c9a96e','#f4a7b9','#e8d0a0','#ddb8e8','#f0b8c8'];
+    setInterval(() => {
+        const layer = document.getElementById('heroSparkleLayer');
+        if (!layer) return;
+        const el = document.createElement('span');
+        el.textContent = SC[Math.floor(Math.random()*SC.length)];
+        el.style.cssText = `position:absolute;left:${Math.random()*100}%;bottom:0;color:${SK[Math.floor(Math.random()*SK.length)]};font-size:${0.5+Math.random()*0.85}rem;animation:sparkle-float ${1.6+Math.random()*2}s ease-out forwards;pointer-events:none`;
+        layer.appendChild(el);
+        setTimeout(() => el.remove(), 3800);
+    }, 340);
+
+    /* ── FADE IN ON SCROLL ── */
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+    /* ── INIT ── */
+    loadFromFirebase();
     </script>
 </body>
 </html>
