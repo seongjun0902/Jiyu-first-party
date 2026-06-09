@@ -52,10 +52,10 @@
             <p class="hero-pretitle" id="txt-heroPretitle">우리의 소중한 보물</p>
             <h1 class="hero-name" id="txt-heroName">김지유</h1>
             <p class="hero-event" id="txt-heroEvent">첫 번째 생일</p>
-            <div class="hero-badge">
-                <span class="badge-star">✦</span>
-                1st Birthday Party
-                <span class="badge-star">✦</span>
+            <div class="hero-badge" id="heroBadge">
+                <span class="badge-star" id="badgeStarL">✦</span>
+                <span id="txt-heroBadge">1st Birthday Party</span>
+                <span class="badge-star" id="badgeStarR">✦</span>
             </div>
         </div>
         <div class="hero-photo-wrap" id="heroPhotoWrap">
@@ -241,6 +241,10 @@
                     <div class="theme-grid" id="themeGrid"></div>
                     <p class="admin-section-label" style="margin-top:20px">사진 프레임</p>
                     <div class="frame-grid" id="frameGrid"></div>
+                    <p class="admin-section-label" style="margin-top:20px">카드 프레임</p>
+                    <div class="frame-grid" id="cardFrameGrid"></div>
+                    <p class="admin-section-label" style="margin-top:20px">뱃지 스타일</p>
+                    <div class="frame-grid" id="badgeStyleGrid"></div>
                 </div>
 
                 <!-- 폰트 탭 -->
@@ -322,7 +326,7 @@
     /* ── DEFAULTS ── */
     const DEFAULTS = {
         settings: {
-            theme: 'A', font: 'A', frame: 'A', heroEffect: 'none',
+            theme: 'A', font: 'A', frame: 'A', cardFrame: 'A', badgeStyle: 'A', heroEffect: 'none',
             googlePhotosUrl: 'https://photos.app.goo.gl/9USdjabY9yuVsLr99',
             heroImageUrl: ''
         },
@@ -330,6 +334,7 @@
             heroPretitle: '우리의 소중한 보물',
             heroName: '김지유',
             heroEvent: '첫 번째 생일',
+            heroBadge: '1st Birthday Party',
             greetingP1: '작고 소중한 첫 걸음을 내디딘 우리 지유가\n어느덧 첫 생일을 맞이하게 되었습니다.',
             greetingP2: '그동안 보내주신 사랑과 관심에 감사드리며,\n기쁨의 자리에 함께해 주시면\n큰 힘이 될 것 같습니다.',
             greetingP3: '따뜻한 마음으로 축하해 주시면\n감사하겠습니다.',
@@ -416,6 +421,26 @@
         float:  '둥실 떠있기'
     };
 
+    /* ── CARD FRAMES (6종) ── */
+    const CARD_FRAMES = {
+        A: { label: '기본', decos: [] },
+        B: { label: '🌿 보태니컬', decos: [{cls:'cd-tl',text:'🌿'},{cls:'cd-br',text:'🌸'}] },
+        C: { label: '🧸 곰돌이', decos: [{cls:'cd-tr',text:'🧸'},{cls:'cd-bl',text:'🍯'}] },
+        D: { label: '🫧 버블', decos: [] },
+        E: { label: '♡ 하트', decos: [{cls:'cd-tl',text:'♡'},{cls:'cd-tr',text:'♡'},{cls:'cd-bl',text:'♡'},{cls:'cd-br',text:'♡'}] },
+        F: { label: '♛ 왕관', decos: [{cls:'cd-tc',text:'♛'}] }
+    };
+
+    /* ── BADGE STYLES (6종) ── */
+    const BADGE_STYLES = {
+        A: { label: '기본 (금색)', starL: '✦', starR: '✦' },
+        B: { label: '🎀 리본 핑크', starL: '🎀', starR: '🎀' },
+        C: { label: '♛ 왕관 골드', starL: '♛', starR: '♛' },
+        D: { label: '✿ 보태니컬', starL: '✿', starR: '✿' },
+        E: { label: '★ 별빛', starL: '★', starR: '★' },
+        F: { label: '♡ 하트', starL: '♡', starR: '♡' }
+    };
+
     /* ── STATE ── */
     let appState = {
         settings: { ...DEFAULTS.settings },
@@ -482,7 +507,7 @@
     }
 
     function applyTexts(texts) {
-        ['heroPretitle','heroName','heroEvent','greetingSign','infoDate','infoTime',
+        ['heroPretitle','heroName','heroEvent','heroBadge','greetingSign','infoDate','infoTime',
          'infoVenueName','infoVenueAddr','infoParents','footerTitle','footerDate'].forEach(k => {
             const el = document.getElementById('txt-' + k);
             if (el && texts[k] != null) el.textContent = texts[k];
@@ -551,6 +576,8 @@
             applyFont(appState.settings.font);
             applyHeroImage(appState.settings.heroImageUrl);
             applyHeroEffect(appState.settings.heroEffect);
+            applyCardFrame(appState.settings.cardFrame || 'A');
+            applyBadgeStyle(appState.settings.badgeStyle || 'A');
             applyGpUrl(appState.settings.googlePhotosUrl);
 
             appState.texts = { ...DEFAULTS.texts, ...(d.texts || {}) };
@@ -617,6 +644,8 @@
     function buildAdminUI() {
         buildThemeGrid();
         buildFrameGrid();
+        buildCardFrameGrid();
+        buildBadgeStyleGrid();
         buildFontList();
         buildTextFields();
         buildLocationFields();
@@ -699,12 +728,78 @@
         }
     }
 
+    function applyCardFrame(id) {
+        const cf = CARD_FRAMES[id]; if (!cf) return;
+        document.querySelectorAll('.card').forEach(card => {
+            card.className = card.className.replace(/\bcard-frame-\w+\b/g, '').trim();
+            card.querySelectorAll('.card-deco').forEach(d => d.remove());
+            if (id !== 'A') card.classList.add('card-frame-' + id.toLowerCase());
+            if (cf.decos && cf.decos.length) {
+                card.style.overflow = 'visible';
+                cf.decos.forEach(({cls, text}) => {
+                    const el = document.createElement('span');
+                    el.className = 'card-deco ' + cls;
+                    el.textContent = text;
+                    card.appendChild(el);
+                });
+            } else {
+                card.style.overflow = '';
+            }
+        });
+    }
+
+    function applyBadgeStyle(id) {
+        const badge = document.getElementById('heroBadge');
+        if (!badge) return;
+        badge.className = badge.className.replace(/\bbadge-style-\w+\b/g, '').trim();
+        if (id && id !== 'A') badge.classList.add('badge-style-' + id.toLowerCase());
+        const s = BADGE_STYLES[id];
+        if (!s) return;
+        const sl = document.getElementById('badgeStarL');
+        const sr = document.getElementById('badgeStarR');
+        if (sl) sl.textContent = s.starL;
+        if (sr) sr.textContent = s.starR;
+    }
+
+    function buildCardFrameGrid() {
+        const g = document.getElementById('cardFrameGrid'); if (!g) return; g.innerHTML = '';
+        for (const [id, cf] of Object.entries(CARD_FRAMES)) {
+            const btn = document.createElement('button');
+            btn.className = 'frame-option' + (appState.settings.cardFrame === id ? ' active' : '');
+            btn.textContent = cf.label;
+            btn.onclick = () => {
+                applyCardFrame(id);
+                db.ref('settings/cardFrame').set(id);
+                g.querySelectorAll('.frame-option').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            };
+            g.appendChild(btn);
+        }
+    }
+
+    function buildBadgeStyleGrid() {
+        const g = document.getElementById('badgeStyleGrid'); if (!g) return; g.innerHTML = '';
+        for (const [id, bs] of Object.entries(BADGE_STYLES)) {
+            const btn = document.createElement('button');
+            btn.className = 'frame-option' + (appState.settings.badgeStyle === id ? ' active' : '');
+            btn.textContent = bs.label;
+            btn.onclick = () => {
+                applyBadgeStyle(id);
+                db.ref('settings/badgeStyle').set(id);
+                g.querySelectorAll('.frame-option').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            };
+            g.appendChild(btn);
+        }
+    }
+
     function buildTextFields() {
         const c = document.getElementById('textFields'); c.innerHTML = '';
         [
             {k:'heroPretitle', l:'상단 문구'},
             {k:'heroName',     l:'이름'},
             {k:'heroEvent',    l:'행사명'},
+            {k:'heroBadge',    l:'뱃지 텍스트'},
             {k:'greetingP1',   l:'인사말 1', multi:true},
             {k:'greetingP2',   l:'인사말 2', multi:true},
             {k:'greetingP3',   l:'인사말 3', multi:true},
