@@ -218,6 +218,8 @@ body {
         drop-shadow(-6px -12px 36px rgba(254, 232, 208, 0.75))
         drop-shadow(4px 6px 20px rgba(201, 169, 110, 0.18));
 }
+.hero-photo[src=""] { display: none; }
+.hero-preview[src=""] { display: none; }
 
 /* ── NAVBAR ── */
 .navbar {

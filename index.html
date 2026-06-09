@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="hero-photo-wrap" id="heroPhotoWrap">
-            <img src="jiyu-hero.png" alt="김지유" class="hero-photo" id="heroPhoto">
+            <img src="" alt="김지유" class="hero-photo" id="heroPhoto">
         </div>
     </header>
 
@@ -147,14 +147,7 @@
                 <h2 class="card-title">갤러리</h2>
                 <div class="card-divider"><span class="divider-heart">♡</span></div>
                 <p class="gallery-lead">소중한 순간들을 함께 나눠요 ♡</p>
-                <div class="photo-grid" id="photoGrid">
-                    <div class="photo-item" onclick="openLightbox('photos/photo1.jpg')">
-                        <img src="photos/photo1.jpg" alt="김지유" loading="lazy">
-                    </div>
-                    <div class="photo-item" onclick="openLightbox('photos/photo2.jpg')">
-                        <img src="photos/photo2.jpg" alt="김지유" loading="lazy">
-                    </div>
-                </div>
+                <div class="photo-grid" id="photoGrid"></div>
                 <a href="https://photos.app.goo.gl/9USdjabY9yuVsLr99"
                    target="_blank" rel="noopener" class="gp-more-btn" id="gpMoreBtn">
                     view more
@@ -265,7 +258,7 @@
                 <div class="admin-tab-content" id="tab-photo">
                     <p class="admin-section-label">메인 사진</p>
                     <div class="hero-preview-wrap">
-                        <img id="heroPreviewImg" src="jiyu-hero.png" alt="미리보기" class="hero-preview">
+                        <img id="heroPreviewImg" src="" alt="미리보기" class="hero-preview">
                     </div>
                     <label class="admin-upload-btn">
                         사진 업로드하기
@@ -493,9 +486,9 @@
 
     function applyHeroImage(url) {
         const img = document.getElementById('heroPhoto');
-        if (img) img.src = url || 'jiyu-hero.png';
+        if (img) img.src = url || '';
         const p = document.getElementById('heroPreviewImg');
-        if (p) p.src = url || 'jiyu-hero.png';
+        if (p) p.src = url || '';
     }
 
     function applyGpUrl(url) {
@@ -507,10 +500,7 @@
         const grid = document.getElementById('photoGrid');
         grid.innerHTML = '';
         const list = photos && photos.length ? photos : null;
-        if (!list) {
-            ['photos/photo1.jpg','photos/photo2.jpg'].forEach(src =>
-                grid.appendChild(makePhotoItem(src)));
-        } else {
+        if (list) {
             list.forEach(p => grid.appendChild(makePhotoItem(p.url)));
         }
         applyFrame(appState.settings.frame || 'A');
