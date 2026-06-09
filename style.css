@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Gothic:wght@400;700&family=Gowun+Dodum&family=Gamja+Flower&family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;500;700&family=Do+Hyeon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Gothic:wght@400;700&family=Gowun+Dodum&family=Gamja+Flower&family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;500;700&family=Do+Hyeon&family=Single+Day&family=Jua&family=Dongle:wght@300;400;700&family=Poor+Story&family=Hi+Melody&display=swap');
 
 :root {
     --bg:         #fdf8f2;
@@ -454,6 +454,149 @@ body {
     transform: rotate(1deg);
 }
 
+
+/* Botanical leaf (frame I) */
+.photo-grid.frame-i .photo-item {
+    border-radius: 28px;
+    overflow: visible;
+    border: 3px solid rgba(145, 190, 142, 0.5);
+    box-shadow: 0 0 0 8px rgba(224, 246, 218, 0.82), 0 8px 24px rgba(96, 150, 100, 0.18);
+}
+.photo-grid.frame-i .photo-item img { border-radius: 24px; }
+.photo-grid.frame-i .photo-item::before,
+.photo-grid.frame-i .photo-item::after {
+    position: absolute;
+    z-index: 2;
+    font-size: 1.45rem;
+    line-height: 1;
+    text-shadow: 0 2px 6px rgba(255,255,255,0.8);
+    pointer-events: none;
+}
+.photo-grid.frame-i .photo-item::before { content: '🌿'; top: -14px; left: -10px; transform: rotate(-18deg); }
+.photo-grid.frame-i .photo-item::after  { content: '🌱'; right: -9px; bottom: -13px; transform: rotate(22deg); }
+
+/* Teddy birthday (frame J) */
+.photo-grid.frame-j .photo-item {
+    border-radius: 24px;
+    overflow: visible;
+    border: 4px solid #f2c99f;
+    box-shadow: 0 0 0 7px #fff3df, 0 8px 24px rgba(154, 98, 55, 0.18);
+}
+.photo-grid.frame-j .photo-item img { border-radius: 18px; }
+.photo-grid.frame-j .photo-item::before {
+    content: '🧸';
+    position: absolute;
+    z-index: 3;
+    top: -22px;
+    right: -14px;
+    font-size: 2rem;
+    filter: drop-shadow(0 3px 5px rgba(90,48,21,0.18));
+    pointer-events: none;
+}
+.photo-grid.frame-j .photo-item::after {
+    content: '1st';
+    position: absolute;
+    z-index: 3;
+    left: 10px;
+    bottom: -14px;
+    padding: 2px 11px;
+    border-radius: 999px;
+    background: #fff7e9;
+    color: #c58243;
+    border: 1.5px solid #f2c99f;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    pointer-events: none;
+}
+
+/* Heart ribbon (frame K) */
+.photo-grid.frame-k .photo-item {
+    border-radius: 22px;
+    overflow: visible;
+    box-shadow: 0 0 0 4px #fff, 0 0 0 8px var(--pink-mid), 0 8px 24px var(--shadow-pk);
+}
+.photo-grid.frame-k .photo-item img { border-radius: 18px; }
+.photo-grid.frame-k .photo-item::before {
+    content: '♡';
+    position: absolute;
+    z-index: 3;
+    top: -19px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--pink-light);
+    color: var(--gold);
+    border: 2px solid #fff;
+    box-shadow: 0 3px 12px var(--shadow-pk);
+    font-size: 1.25rem;
+    pointer-events: none;
+}
+.photo-grid.frame-k .photo-item::after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    left: 14%;
+    right: 14%;
+    bottom: -10px;
+    height: 22px;
+    border-radius: 0 0 18px 18px;
+    background: linear-gradient(90deg, transparent 0 10%, var(--pink-mid) 10% 45%, #fff 45% 55%, var(--pink-mid) 55% 90%, transparent 90%);
+    pointer-events: none;
+}
+
+/* Cloud starlight (frame L) */
+.photo-grid.frame-l .photo-item {
+    border-radius: 36px;
+    overflow: visible;
+    border: 4px solid #d9efff;
+    box-shadow: 0 0 0 8px rgba(255,255,255,0.9), 0 8px 26px rgba(126,200,227,0.24);
+}
+.photo-grid.frame-l .photo-item img { border-radius: 30px; }
+.photo-grid.frame-l .photo-item::before,
+.photo-grid.frame-l .photo-item::after {
+    position: absolute;
+    z-index: 3;
+    pointer-events: none;
+    filter: drop-shadow(0 3px 5px rgba(74,159,212,0.16));
+}
+.photo-grid.frame-l .photo-item::before { content: '☁️'; left: -15px; bottom: -17px; font-size: 2.2rem; }
+.photo-grid.frame-l .photo-item::after  { content: '✦'; right: -8px; top: -15px; color: #ffd56b; font-size: 1.6rem; }
+
+/* Crown lace (frame M) */
+.photo-grid.frame-m .photo-item {
+    border-radius: 26px;
+    overflow: visible;
+    border: 3px double var(--gold);
+    box-shadow: 0 0 0 7px rgba(255,248,240,0.95), 0 8px 25px rgba(201,169,110,0.22);
+}
+.photo-grid.frame-m .photo-item img { border-radius: 20px; }
+.photo-grid.frame-m .photo-item::before {
+    content: '♛';
+    position: absolute;
+    z-index: 3;
+    top: -27px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold);
+    font-size: 2.05rem;
+    text-shadow: 0 2px 0 #fff, 0 4px 10px rgba(201,169,110,0.28);
+    pointer-events: none;
+}
+.photo-grid.frame-m .photo-item::after {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    z-index: 2;
+    border: 1px dashed rgba(201,169,110,0.62);
+    border-radius: 18px;
+    pointer-events: none;
+}
+
 /* Bubble particles (frame D) */
 .bubble-layer {
     position: absolute;
@@ -566,9 +709,32 @@ body {
     overflow-y: auto;
 }
 .admin-inner {
+        position: relative;
     max-width: 720px;
     margin: 0 auto;
-    padding: 24px 20px 36px;
+    padding: 28px 20px 36px;
+}
+.admin-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    background: var(--bg);
+    color: var(--text-light);
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    z-index: 2;
+}
+.admin-close:hover {
+    border-color: var(--gold);
+    color: var(--text);
+    transform: rotate(90deg);
 }
 
 /* Login */
