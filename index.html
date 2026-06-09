@@ -4,10 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>김지유 첫 번째 생일잔치</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Gothic:wght@400;700&family=Gowun+Dodum&family=Gamja+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Gothic:wght@400;700&family=Gowun+Dodum&family=Gamja+Flower&family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;500;700&family=Do+Hyeon&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <!-- 캐시된 테마 즉시 적용 (FOUC 방지) -->
+    <script>
+    (function(){
+        try{
+            var c=JSON.parse(localStorage.getItem('jiyu_cache')||'null');
+            if(c&&c.theme){
+                var t={
+                    A:{'--bg':'#fdf8f2','--hero-1':'#fef3e8','--hero-2':'#fde5d0','--card-bg':'#fffdf9','--text':'#4a3728','--text-mid':'#7a6354','--text-light':'#a89080','--gold':'#c9a96e','--gold-light':'#eddcb8','--pink':'#f4a7b9','--pink-light':'#fce8ef','--pink-mid':'#e8c4ce','--border':'#eddccc','--shadow':'rgba(74,55,40,0.07)','--shadow-pk':'rgba(244,167,185,0.14)'},
+                    B:{'--bg':'#fdf0f5','--hero-1':'#ffe4ef','--hero-2':'#e8f6ff','--card-bg':'#fffafb','--text':'#3d2040','--text-mid':'#7a5080','--text-light':'#b090b8','--gold':'#e88ab0','--gold-light':'#f5c8db','--pink':'#7ec8e3','--pink-light':'#dff2f8','--pink-mid':'#b8e0ec','--border':'#f0d0e0','--shadow':'rgba(61,32,64,0.07)','--shadow-pk':'rgba(126,200,227,0.18)'},
+                    C:{'--bg':'#f7f3fc','--hero-1':'#ede5fa','--hero-2':'#faf0f5','--card-bg':'#fdfbff','--text':'#3d2855','--text-mid':'#7a608a','--text-light':'#b0a0c0','--gold':'#c9939e','--gold-light':'#e8c8cc','--pink':'#c3a8e8','--pink-light':'#ede3fa','--pink-mid':'#d8c8f0','--border':'#e0d0f0','--shadow':'rgba(61,40,85,0.07)','--shadow-pk':'rgba(195,168,232,0.18)'},
+                    D:{'--bg':'#f3fdf8','--hero-1':'#e0faf0','--hero-2':'#fff3f0','--card-bg':'#fafffe','--text':'#1a4035','--text-mid':'#4a7065','--text-light':'#88aaa0','--gold':'#ff8070','--gold-light':'#ffc8c0','--pink':'#60c8a0','--pink-light':'#d0f5e8','--pink-mid':'#a8e8cc','--border':'#c0eedd','--shadow':'rgba(26,64,53,0.07)','--shadow-pk':'rgba(96,200,160,0.18)'},
+                    E:{'--bg':'#fff9f3','--hero-1':'#fff0e3','--hero-2':'#ffe5d0','--card-bg':'#fffdf9','--text':'#5a3015','--text-mid':'#8a5835','--text-light':'#c0905a','--gold':'#d4882a','--gold-light':'#f5d8a0','--pink':'#f0a060','--pink-light':'#ffe8d0','--pink-mid':'#f8c890','--border':'#f0d8b8','--shadow':'rgba(90,48,21,0.08)','--shadow-pk':'rgba(240,160,96,0.18)'},
+                    F:{'--bg':'#fff0f5','--hero-1':'#ffe0ec','--hero-2':'#ffcce0','--card-bg':'#fffbfc','--text':'#5a1530','--text-mid':'#9a4060','--text-light':'#c88098','--gold':'#e0406a','--gold-light':'#f5b0c5','--pink':'#ff88aa','--pink-light':'#ffe0ec','--pink-mid':'#f5b0c5','--border':'#f5c0d0','--shadow':'rgba(90,21,48,0.07)','--shadow-pk':'rgba(224,64,106,0.15)'},
+                    G:{'--bg':'#f0f8ff','--hero-1':'#e6f3ff','--hero-2':'#cce7ff','--card-bg':'#f8fcff','--text':'#1a3a5c','--text-mid':'#4a6a8c','--text-light':'#8aaac8','--gold':'#4a9fd4','--gold-light':'#b0d8f0','--pink':'#80c0e8','--pink-light':'#d8eef8','--pink-mid':'#a8d4f0','--border':'#c0ddf0','--shadow':'rgba(26,58,92,0.07)','--shadow-pk':'rgba(74,159,212,0.15)'},
+                    H:{'--bg':'#fff8f0','--hero-1':'#fff0e6','--hero-2':'#ffe0cc','--card-bg':'#fffcf9','--text':'#4a2010','--text-mid':'#8a5030','--text-light':'#c09070','--gold':'#e8621a','--gold-light':'#f5c090','--pink':'#f0a060','--pink-light':'#ffe8d0','--pink-mid':'#f5c090','--border':'#f0d0b0','--shadow':'rgba(74,32,16,0.08)','--shadow-pk':'rgba(232,98,26,0.15)'}
+                };
+                var v=t[c.theme];
+                if(v){var r=document.documentElement;for(var k in v)r.style.setProperty(k,v[k]);}
+            }
+        }catch(e){}
+    })();
+    </script>
 </head>
 <body>
+
+    <!-- 로딩 오버레이 -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-content">
+            <p class="loading-flower">✿</p>
+            <p class="loading-name">김지유</p>
+            <p class="loading-sub">첫 번째 생일잔치</p>
+            <div class="loading-dots">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
 
     <!-- Hero -->
     <header class="hero">
@@ -24,7 +58,7 @@
                 <span class="badge-star">✦</span>
             </div>
         </div>
-        <div class="hero-photo-wrap">
+        <div class="hero-photo-wrap" id="heroPhotoWrap">
             <img src="jiyu-hero.png" alt="김지유" class="hero-photo" id="heroPhoto">
         </div>
     </header>
@@ -229,16 +263,20 @@
 
                 <!-- 메인사진 탭 -->
                 <div class="admin-tab-content" id="tab-photo">
-                    <p class="admin-section-label">메인 사진 교체</p>
+                    <p class="admin-section-label">메인 사진</p>
                     <div class="hero-preview-wrap">
                         <img id="heroPreviewImg" src="jiyu-hero.png" alt="미리보기" class="hero-preview">
                     </div>
                     <label class="admin-upload-btn">
-                        사진 선택하기
+                        사진 업로드하기
                         <input type="file" accept="image/*" id="heroFileInput" style="display:none"
                                onchange="uploadHeroPhoto(this)">
                     </label>
+                    <button class="admin-btn-secondary" onclick="resetHeroPhoto()" style="margin-bottom:6px">원본 사진으로 복원</button>
                     <p class="admin-upload-status" id="heroUploadStatus"></p>
+
+                    <p class="admin-section-label" style="margin-top:18px">사진 효과</p>
+                    <div class="frame-grid" id="heroEffectGrid"></div>
                 </div>
 
                 <!-- 갤러리 탭 -->
@@ -290,7 +328,7 @@
     /* ── DEFAULTS ── */
     const DEFAULTS = {
         settings: {
-            theme: 'A', font: 'A', frame: 'A',
+            theme: 'A', font: 'A', frame: 'A', heroEffect: 'none',
             googlePhotosUrl: 'https://photos.app.goo.gl/9USdjabY9yuVsLr99',
             heroImageUrl: ''
         },
@@ -321,36 +359,57 @@
         }
     };
 
-    /* ── THEMES ── */
+    /* ── THEMES (8종) ── */
     const THEMES = {
         A: { name: '베이지+금', sw: ['#fde5d0','#c9a96e'],
              v: {'--bg':'#fdf8f2','--hero-1':'#fef3e8','--hero-2':'#fde5d0','--card-bg':'#fffdf9','--text':'#4a3728','--text-mid':'#7a6354','--text-light':'#a89080','--gold':'#c9a96e','--gold-light':'#eddcb8','--pink':'#f4a7b9','--pink-light':'#fce8ef','--pink-mid':'#e8c4ce','--border':'#eddccc','--shadow':'rgba(74,55,40,0.07)','--shadow-pk':'rgba(244,167,185,0.14)'}},
-        B: { name: '핑크+하늘+민트', sw: ['#ffc8db','#7ec8e3'],
+        B: { name: '핑크+하늘', sw: ['#ffc8db','#7ec8e3'],
              v: {'--bg':'#fdf0f5','--hero-1':'#ffe4ef','--hero-2':'#e8f6ff','--card-bg':'#fffafb','--text':'#3d2040','--text-mid':'#7a5080','--text-light':'#b090b8','--gold':'#e88ab0','--gold-light':'#f5c8db','--pink':'#7ec8e3','--pink-light':'#dff2f8','--pink-mid':'#b8e0ec','--border':'#f0d0e0','--shadow':'rgba(61,32,64,0.07)','--shadow-pk':'rgba(126,200,227,0.18)'}},
         C: { name: '라벤더+로즈골드', sw: ['#d8c8f0','#c9939e'],
              v: {'--bg':'#f7f3fc','--hero-1':'#ede5fa','--hero-2':'#faf0f5','--card-bg':'#fdfbff','--text':'#3d2855','--text-mid':'#7a608a','--text-light':'#b0a0c0','--gold':'#c9939e','--gold-light':'#e8c8cc','--pink':'#c3a8e8','--pink-light':'#ede3fa','--pink-mid':'#d8c8f0','--border':'#e0d0f0','--shadow':'rgba(61,40,85,0.07)','--shadow-pk':'rgba(195,168,232,0.18)'}},
         D: { name: '민트+코랄', sw: ['#a8e8cc','#ff8070'],
              v: {'--bg':'#f3fdf8','--hero-1':'#e0faf0','--hero-2':'#fff3f0','--card-bg':'#fafffe','--text':'#1a4035','--text-mid':'#4a7065','--text-light':'#88aaa0','--gold':'#ff8070','--gold-light':'#ffc8c0','--pink':'#60c8a0','--pink-light':'#d0f5e8','--pink-mid':'#a8e8cc','--border':'#c0eedd','--shadow':'rgba(26,64,53,0.07)','--shadow-pk':'rgba(96,200,160,0.18)'}},
         E: { name: '피치+아이보리', sw: ['#f8c890','#d4882a'],
-             v: {'--bg':'#fff9f3','--hero-1':'#fff0e3','--hero-2':'#ffe5d0','--card-bg':'#fffdf9','--text':'#5a3015','--text-mid':'#8a5835','--text-light':'#c0905a','--gold':'#d4882a','--gold-light':'#f5d8a0','--pink':'#f0a060','--pink-light':'#ffe8d0','--pink-mid':'#f8c890','--border':'#f0d8b8','--shadow':'rgba(90,48,21,0.08)','--shadow-pk':'rgba(240,160,96,0.18)'}}
+             v: {'--bg':'#fff9f3','--hero-1':'#fff0e3','--hero-2':'#ffe5d0','--card-bg':'#fffdf9','--text':'#5a3015','--text-mid':'#8a5835','--text-light':'#c0905a','--gold':'#d4882a','--gold-light':'#f5d8a0','--pink':'#f0a060','--pink-light':'#ffe8d0','--pink-mid':'#f8c890','--border':'#f0d8b8','--shadow':'rgba(90,48,21,0.08)','--shadow-pk':'rgba(240,160,96,0.18)'}},
+        F: { name: '체리블라썸', sw: ['#ffcce0','#e0406a'],
+             v: {'--bg':'#fff0f5','--hero-1':'#ffe0ec','--hero-2':'#ffcce0','--card-bg':'#fffbfc','--text':'#5a1530','--text-mid':'#9a4060','--text-light':'#c88098','--gold':'#e0406a','--gold-light':'#f5b0c5','--pink':'#ff88aa','--pink-light':'#ffe0ec','--pink-mid':'#f5b0c5','--border':'#f5c0d0','--shadow':'rgba(90,21,48,0.07)','--shadow-pk':'rgba(224,64,106,0.15)'}},
+        G: { name: '스카이+클라우드', sw: ['#cce7ff','#4a9fd4'],
+             v: {'--bg':'#f0f8ff','--hero-1':'#e6f3ff','--hero-2':'#cce7ff','--card-bg':'#f8fcff','--text':'#1a3a5c','--text-mid':'#4a6a8c','--text-light':'#8aaac8','--gold':'#4a9fd4','--gold-light':'#b0d8f0','--pink':'#80c0e8','--pink-light':'#d8eef8','--pink-mid':'#a8d4f0','--border':'#c0ddf0','--shadow':'rgba(26,58,92,0.07)','--shadow-pk':'rgba(74,159,212,0.15)'}},
+        H: { name: '선셋 오렌지', sw: ['#ffe0cc','#e8621a'],
+             v: {'--bg':'#fff8f0','--hero-1':'#fff0e6','--hero-2':'#ffe0cc','--card-bg':'#fffcf9','--text':'#4a2010','--text-mid':'#8a5030','--text-light':'#c09070','--gold':'#e8621a','--gold-light':'#f5c090','--pink':'#f0a060','--pink-light':'#ffe8d0','--pink-mid':'#f5c090','--border':'#f0d0b0','--shadow':'rgba(74,32,16,0.08)','--shadow-pk':'rgba(232,98,26,0.15)'}}
     };
 
-    /* ── FONTS ── */
+    /* ── FONTS (8종) ── */
     const FONTS = {
         A: { label: '노토 세리프 (기본)', family: "'Noto Serif KR', serif" },
         B: { label: '나눔 명조',          family: "'Nanum Myeongjo', serif" },
         C: { label: '나눔 고딕',          family: "'Nanum Gothic', sans-serif" },
         D: { label: '고운 돋움',          family: "'Gowun Dodum', sans-serif" },
-        E: { label: '감자 꽃',            family: "'Gamja Flower', cursive" }
+        E: { label: '감자 꽃 (손글씨)',   family: "'Gamja Flower', cursive" },
+        F: { label: '블랙 한 산스 (굵게)', family: "'Black Han Sans', sans-serif" },
+        G: { label: '노토 산스 (모던)',    family: "'Noto Sans KR', sans-serif" },
+        H: { label: '도현 (귀여운 고딕)', family: "'Do Hyeon', sans-serif" }
     };
 
-    /* ── FRAMES ── */
+    /* ── FRAMES (8종) ── */
     const FRAMES = {
         A: '기본 (둥근 사각형)',
         B: '원형',
         C: '블러 테두리',
         D: '버블 효과',
-        E: '테마 컬러 테두리'
+        E: '테마 컬러 테두리',
+        F: '폴라로이드',
+        G: '무지개 글로우',
+        H: '빈티지'
+    };
+
+    /* ── HERO EFFECTS ── */
+    const HERO_EFFECTS = {
+        none:   '효과 없음',
+        circle: '원형 크롭',
+        glow:   '골드 글로우',
+        frame:  '액자 스타일',
+        float:  '둥실 떠있기'
     };
 
     /* ── STATE ── */
@@ -362,6 +421,7 @@
         isAdmin:  false
     };
     let bubbleTimer = null;
+    let firstLoad   = true;
 
     /* ── APPLY FUNCTIONS ── */
     function applyTheme(id) {
@@ -383,8 +443,7 @@
         if (id === 'D') {
             if (!existing) {
                 const layer = document.createElement('div');
-                layer.id = 'bubbleLayer';
-                layer.className = 'bubble-layer';
+                layer.id = 'bubbleLayer'; layer.className = 'bubble-layer';
                 grid.appendChild(layer);
             }
             startBubbles();
@@ -392,6 +451,12 @@
             stopBubbles();
             if (existing) existing.remove();
         }
+    }
+
+    function applyHeroEffect(id) {
+        const wrap = document.getElementById('heroPhotoWrap');
+        if (!wrap) return;
+        wrap.className = 'hero-photo-wrap' + (id && id !== 'none' ? ' hero-effect-' + id : '');
     }
 
     function startBubbles() {
@@ -427,10 +492,10 @@
     }
 
     function applyHeroImage(url) {
-        if (!url) return;
-        document.getElementById('heroPhoto').src = url;
+        const img = document.getElementById('heroPhoto');
+        if (img) img.src = url || 'jiyu-hero.png';
         const p = document.getElementById('heroPreviewImg');
-        if (p) p.src = url;
+        if (p) p.src = url || 'jiyu-hero.png';
     }
 
     function applyGpUrl(url) {
@@ -484,6 +549,7 @@
             applyTheme(appState.settings.theme);
             applyFont(appState.settings.font);
             applyHeroImage(appState.settings.heroImageUrl);
+            applyHeroEffect(appState.settings.heroEffect);
             applyGpUrl(appState.settings.googlePhotosUrl);
 
             appState.texts = { ...DEFAULTS.texts, ...(d.texts || {}) };
@@ -499,6 +565,17 @@
             applyLocation(appState.location);
 
             if (appState.isAdmin) refreshAdminUI();
+
+            /* ── 첫 로드: 오버레이 제거 + localStorage 캐시 ── */
+            if (firstLoad) {
+                firstLoad = false;
+                try { localStorage.setItem('jiyu_cache', JSON.stringify({ theme: appState.settings.theme })); } catch(e) {}
+                const overlay = document.getElementById('loadingOverlay');
+                if (overlay) {
+                    overlay.classList.add('fade-out');
+                    setTimeout(() => overlay.remove(), 500);
+                }
+            }
         });
     }
 
@@ -537,6 +614,7 @@
         buildFontList();
         buildTextFields();
         buildLocationFields();
+        buildHeroEffectGrid();
         refreshGalleryManage();
         const gi = document.getElementById('gpUrlInput');
         if (gi) gi.value = appState.settings.googlePhotosUrl || '';
@@ -558,6 +636,7 @@
             btn.onclick = () => {
                 applyTheme(id);
                 db.ref('settings/theme').set(id);
+                try { localStorage.setItem('jiyu_cache', JSON.stringify({ theme: id })); } catch(e) {}
                 g.querySelectorAll('.theme-swatch').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
             };
@@ -592,6 +671,22 @@
                 applyFont(id);
                 db.ref('settings/font').set(id);
                 g.querySelectorAll('.font-option').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            };
+            g.appendChild(btn);
+        }
+    }
+
+    function buildHeroEffectGrid() {
+        const g = document.getElementById('heroEffectGrid'); g.innerHTML = '';
+        for (const [id, label] of Object.entries(HERO_EFFECTS)) {
+            const btn = document.createElement('button');
+            btn.className = 'frame-option' + (appState.settings.heroEffect === id ? ' active' : '');
+            btn.textContent = label;
+            btn.onclick = () => {
+                applyHeroEffect(id);
+                db.ref('settings/heroEffect').set(id);
+                g.querySelectorAll('.frame-option').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
             };
             g.appendChild(btn);
@@ -710,6 +805,10 @@
             setTimeout(() => s.textContent = '', 3000);
         } catch(e) { s.textContent = '오류: ' + e.message; }
         input.value = '';
+    }
+
+    function resetHeroPhoto() {
+        db.ref('settings/heroImageUrl').set('').then(() => showToast('원본 사진으로 복원됨'));
     }
 
     async function uploadGalleryPhotos(input) {
