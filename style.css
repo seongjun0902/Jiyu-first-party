@@ -708,19 +708,25 @@ body {
     max-height: 50dvh;
     max-height: 50vh;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 .admin-inner {
     max-width: 720px;
+    width: 100%;
     margin: 0 auto;
-    padding: 12px 20px 36px;
+    padding: 8px 20px 36px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    max-height: inherit;
+    flex: 1;
+    min-height: 0;
 }
 .admin-close {
-    position: absolute;
-    top: 12px;
-    right: 14px;
+    position: static;
+    align-self: flex-end;
+    flex-shrink: 0;
+    margin: 10px 14px 0 auto;
+    display: block;
     width: 34px;
     height: 34px;
     border: 1.5px solid var(--border);
