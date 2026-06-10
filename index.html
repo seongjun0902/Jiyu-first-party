@@ -6,6 +6,11 @@
     <title>김지유 첫 번째 생일잔치</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Gothic:wght@400;700&family=Gowun+Dodum&family=Gamja+Flower&family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;500;700&family=Do+Hyeon&family=Single+Day&family=Jua&family=Dongle:wght@300;400;700&family=Poor+Story&family=Hi+Melody&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="지유 돌잔치">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
     <!-- 캐시된 테마 즉시 적용 (FOUC 방지) -->
     <script>
     (function(){
@@ -983,5 +988,14 @@
     /* ── INIT ── */
     loadFromFirebase();
     </script>
+    <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/Jiyu-first-party/service-worker.js')
+        .then(reg => console.log('SW 등록 완료', reg.scope))
+        .catch(err => console.log('SW 등록 실패', err));
+    });
+  }
+</script>
 </body>
 </html>
