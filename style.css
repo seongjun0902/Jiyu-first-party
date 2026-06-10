@@ -705,16 +705,17 @@ body {
     z-index: 500;
 }
 .admin-panel.open {
-    max-height: 33dvh;
-    max-height: 33vh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    max-height: 50dvh;
+    max-height: 50vh;
+    overflow: hidden;
 }
 .admin-inner {
-    position: relative;
     max-width: 720px;
     margin: 0 auto;
     padding: 12px 20px 36px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: inherit;
 }
 .admin-close {
     position: absolute;
