@@ -705,14 +705,16 @@ body {
     z-index: 500;
 }
 .admin-panel.open {
-    max-height: 82vh;
+    max-height: 33dvh;
+    max-height: 33vh;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 .admin-inner {
-        position: relative;
+    position: relative;
     max-width: 720px;
     margin: 0 auto;
-    padding: 28px 20px 36px;
+    padding: 12px 20px 36px;
 }
 .admin-close {
     position: absolute;
@@ -790,6 +792,11 @@ textarea.admin-input { resize: vertical; min-height: 64px; }
     display: flex; gap: 2px; flex-wrap: wrap;
     border-bottom: 1.5px solid var(--border);
     margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    background: var(--card-bg);
+    z-index: 2;
+    padding-top: 4px;
 }
 .admin-tab {
     padding: 8px 14px;
