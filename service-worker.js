@@ -1,11 +1,12 @@
-const CACHE_NAME = 'jiyu-party-v2';
+const CACHE_NAME = 'jiyu-party-v3';
+// 상대 경로: GitHub Pages(/Jiyu-first-party/)든 Netlify(루트)든 동일하게 동작
 const STATIC_ASSETS = [
-  '/Jiyu-first-party/',
-  '/Jiyu-first-party/index.html',
-  '/Jiyu-first-party/style.css',
-  '/Jiyu-first-party/manifest.json',
-  '/Jiyu-first-party/icons/icon-192.png',
-  '/Jiyu-first-party/icons/icon-512.png'
+  './',
+  './index.html',
+  './style.css',
+  './manifest.json',
+  './icons/icon-192.png',
+  './icons/icon-512.png'
 ];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_ASSETS)));

@@ -322,16 +322,20 @@
 
     <script>
     /* ── CONFIG ── */
-    firebase.initializeApp({
-        apiKey: "AIzaSyDvAxHG2gOupgMn_vUgsFX4M3pa5gStTDY",
-        authDomain: "first-party-756ff.firebaseapp.com",
-        databaseURL: "https://first-party-756ff-default-rtdb.firebaseio.com",
-        projectId: "first-party-756ff",
-        storageBucket: "first-party-756ff.firebasestorage.app",
-        messagingSenderId: "855738572188",
-        appId: "1:855738572188:web:f9e2d11a483a081017fc59"
-    });
-    const db = firebase.database();
+    /* Firebase SDK 로드 실패(네트워크 불안정 등) 시에도 기본 콘텐츠는 보이도록 방어 */
+    let db = null;
+    try {
+        firebase.initializeApp({
+            apiKey: "AIzaSyDvAxHG2gOupgMn_vUgsFX4M3pa5gStTDY",
+            authDomain: "first-party-756ff.firebaseapp.com",
+            databaseURL: "https://first-party-756ff-default-rtdb.firebaseio.com",
+            projectId: "first-party-756ff",
+            storageBucket: "first-party-756ff.firebasestorage.app",
+            messagingSenderId: "855738572188",
+            appId: "1:855738572188:web:f9e2d11a483a081017fc59"
+        });
+        db = firebase.database();
+    } catch(e) { console.warn('Firebase 초기화 실패:', e); }
     const CLD_CLOUD  = 'dxm5dpptx';
     const CLD_PRESET = 'jelly11';
 
@@ -624,6 +628,16 @@
                 firstLoad = false;
             }
         } catch(e) {}
+
+        /* 안전장치: 4초 안에 Firebase 응답이 없으면 기본 콘텐츠라도 보여줌 */
+        setTimeout(() => {
+            if (firstLoad) {
+                firstLoad = false;
+                hideOverlay();
+            }
+        }, 4000);
+
+        if (!db) return;
 
         db.ref('/').on('value', snap => {
             const d = snap.val() || {};
@@ -1020,7 +1034,7 @@
     <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/Jiyu-first-party/service-worker.js')
+      navigator.serviceWorker.register('service-worker.js')
         .then(reg => console.log('SW 등록 완료', reg.scope))
         .catch(err => console.log('SW 등록 실패', err));
     });
