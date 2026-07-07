@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jiyu-party-v3';
+const CACHE_NAME = 'jiyu-party-v4';
 // 상대 경로: GitHub Pages(/Jiyu-first-party/)든 Netlify(루트)든 동일하게 동작
 const STATIC_ASSETS = [
   './',
@@ -62,6 +62,21 @@ self.addEventListener('fetch', event => {
         }).catch(() => cached);
         return cached || fetched;
       })
+    );
+    return;
+  }
+
+  // 우리 사이트 파일(HTML/CSS/JS/manifest/아이콘): 네트워크 우선
+  // → 배포하면 항상 최신본을 받고, 오프라인일 때만 캐시 사용 (예전처럼 옛 화면이 남지 않음)
+  if (url.origin === self.location.origin) {
+    event.respondWith(
+      fetch(event.request).then(response => {
+        if (response && response.status === 200 && response.type === 'basic') {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+        }
+        return response;
+      }).catch(() => caches.match(event.request))
     );
     return;
   }
