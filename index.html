@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>김지유 첫 번째 생일잔치</title>
+    <meta name="description" content="김지유의 첫 번째 생일을 함께 축하해요 🎂 2026년 8월 1일 (토) 오후 12시 30분">
+    <!-- 공유 미리보기 (카카오톡·문자·SNS) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="김지유 첫 번째 생일잔치">
+    <meta property="og:description" content="우리의 소중한 보물 김지유의 첫 번째 생일에 초대합니다 ♡ 2026. 8. 1 (토) 오후 12:30">
+    <meta property="og:image" content="https://seongjun0902.github.io/Jiyu-first-party/icons/og-image.png?v=1">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://seongjun0902.github.io/Jiyu-first-party/">
+    <meta property="og:locale" content="ko_KR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="김지유 첫 번째 생일잔치">
+    <meta name="twitter:description" content="우리의 소중한 보물 김지유의 첫 번째 생일에 초대합니다 ♡">
+    <meta name="twitter:image" content="https://seongjun0902.github.io/Jiyu-first-party/icons/og-image.png?v=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://www.gstatic.com">
@@ -1036,7 +1050,11 @@
             document.getElementById('gbPw').value = '';
             document.getElementById('gbMsg').value = '';
             showToast('축하 메시지가 등록되었습니다 ♡');
-        } catch(e) { showToast('등록에 실패했어요. 잠시 후 다시 시도해주세요'); }
+        } catch(e) {
+            console.error('방명록 등록 실패:', e);
+            const denied = e && (e.code === 'PERMISSION_DENIED' || /permission/i.test(e.message || ''));
+            showToast(denied ? '권한 오류: 방명록 저장이 차단되어 있어요' : '등록에 실패했어요. 잠시 후 다시 시도해주세요');
+        }
         btn.disabled = false;
     }
 
