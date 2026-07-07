@@ -82,6 +82,7 @@
             <li><a href="#info">행사정보</a></li>
             <li><a href="#gallery">갤러리</a></li>
             <li><a href="#location">오시는길</a></li>
+            <li><a href="#guestbook">방명록</a></li>
         </ul>
     </nav>
 
@@ -201,6 +202,23 @@
                     <a id="btn-naver" href="https://map.naver.com/v5/search/고양시+덕양구+강매동+286-5" target="_blank" rel="noopener" class="map-btn btn-naver">네이버지도</a>
                     <a id="btn-google" href="https://www.google.com/maps/search/고양시+덕양구+강매동+286-5" target="_blank" rel="noopener" class="map-btn btn-google">구글맵</a>
                 </div>
+            </div>
+        </section>
+
+        <!-- 방명록 -->
+        <section id="guestbook" class="section fade-in">
+            <div class="card">
+                <h2 class="card-title">지유의 생일을 축하해주세요~</h2>
+                <div class="card-divider"><span class="divider-heart">♡</span></div>
+                <form class="gb-form" onsubmit="submitGuestbook(event)">
+                    <div class="gb-form-row">
+                        <input type="text" id="gbName" class="admin-input" placeholder="이름" maxlength="20" required>
+                        <input type="password" id="gbPw" class="admin-input" placeholder="비밀번호 4자리" maxlength="4" inputmode="numeric" required>
+                    </div>
+                    <textarea id="gbMsg" class="admin-input" rows="3" placeholder="축하 메시지를 남겨주세요 ♡" maxlength="500" required></textarea>
+                    <button type="submit" class="admin-btn-primary" id="gbSubmitBtn">축하 메시지 남기기</button>
+                </form>
+                <div class="gb-list" id="gbList"></div>
             </div>
         </section>
 
@@ -613,6 +631,8 @@
         appState.location = { ...DEFAULTS.location, ...(d.location || {}) };
         applyLocation(appState.location);
 
+        applyGuestbook(d.guestbook);
+
         if (appState.isAdmin) refreshAdminUI();
     }
 
@@ -981,6 +1001,94 @@
         }
         input.value = '';
         setTimeout(() => s.textContent = '', 3000);
+    }
+
+    /* ── GUESTBOOK ── */
+    async function gbHash(pw) {
+        try {
+            const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('jiyu:' + pw));
+            return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+        } catch(e) {
+            /* 비보안 컨텍스트(http) 폴백 */
+            let h = 5381;
+            const s = 'jiyu:' + pw;
+            for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
+            return 'x' + h.toString(16);
+        }
+    }
+
+    async function submitGuestbook(ev) {
+        ev.preventDefault();
+        if (!db) { showToast('네트워크 연결을 확인해주세요'); return; }
+        const name = document.getElementById('gbName').value.trim();
+        const pw   = document.getElementById('gbPw').value.trim();
+        const msg  = document.getElementById('gbMsg').value.trim();
+        if (!name || !msg) return;
+        if (!/^\d{4}$/.test(pw)) { showToast('비밀번호는 숫자 4자리로 입력해주세요'); return; }
+        const btn = document.getElementById('gbSubmitBtn');
+        btn.disabled = true;
+        try {
+            const pwHash = await gbHash(pw);
+            await db.ref('guestbook').push({
+                name, msg, pw: pwHash,
+                createdAt: firebase.database.ServerValue.TIMESTAMP
+            });
+            document.getElementById('gbPw').value = '';
+            document.getElementById('gbMsg').value = '';
+            showToast('축하 메시지가 등록되었습니다 ♡');
+        } catch(e) { showToast('등록에 실패했어요. 잠시 후 다시 시도해주세요'); }
+        btn.disabled = false;
+    }
+
+    async function deleteGuestbookEntry(key, pwHash) {
+        if (!db) { showToast('네트워크 연결을 확인해주세요'); return; }
+        const input = prompt('작성할 때 입력한 비밀번호 4자리를 입력해주세요');
+        if (input == null) return;
+        const ok = appState.isAdmin || (await gbHash(input.trim())) === pwHash;
+        if (!ok) { showToast('비밀번호가 틀렸습니다'); return; }
+        db.ref('guestbook/' + key).remove().then(() => showToast('삭제되었습니다'));
+    }
+
+    function fmtGbDate(ts) {
+        if (!ts) return '';
+        const d = new Date(ts);
+        return (d.getMonth() + 1) + '월 ' + d.getDate() + '일 '
+            + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+    }
+
+    function applyGuestbook(gbData) {
+        const list = document.getElementById('gbList');
+        if (!list) return;
+        list.innerHTML = '';
+        const entries = gbData
+            ? Object.entries(gbData).map(([key, v]) => ({ key, ...v }))
+            : [];
+        entries.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+        if (!entries.length) {
+            const p = document.createElement('p');
+            p.className = 'gb-empty';
+            p.textContent = '첫 번째 축하 메시지를 남겨주세요 ♡';
+            list.appendChild(p);
+            return;
+        }
+        entries.forEach(e => {
+            const item = document.createElement('div');
+            item.className = 'gb-item';
+            const head = document.createElement('div');
+            head.className = 'gb-item-head';
+            const name = document.createElement('span');
+            name.className = 'gb-name'; name.textContent = e.name || '';
+            const date = document.createElement('span');
+            date.className = 'gb-date'; date.textContent = fmtGbDate(e.createdAt);
+            const del = document.createElement('button');
+            del.className = 'gb-del'; del.textContent = '✕'; del.title = '삭제'; del.type = 'button';
+            del.onclick = () => deleteGuestbookEntry(e.key, e.pw);
+            head.appendChild(name); head.appendChild(date); head.appendChild(del);
+            const msg = document.createElement('p');
+            msg.className = 'gb-msg'; msg.textContent = e.msg || '';
+            item.appendChild(head); item.appendChild(msg);
+            list.appendChild(item);
+        });
     }
 
     /* ── TOAST ── */

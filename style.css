@@ -663,6 +663,35 @@ body {
 .btn-naver { background: #03C75A; color: #fff; }
 .btn-google { background: #4285F4; color: #fff; }
 
+/* ── GUESTBOOK ── */
+.gb-form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px; }
+.gb-form-row { display: flex; gap: 10px; }
+.gb-form-row input { flex: 1; min-width: 0; }
+.gb-list { display: flex; flex-direction: column; gap: 12px; }
+.gb-empty { text-align: center; color: var(--text-light); font-size: 0.88rem; padding: 10px 0; }
+.gb-item {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 16px;
+}
+.gb-item-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.gb-name { font-weight: 600; color: var(--text); font-size: 0.95rem; }
+.gb-date { color: var(--text-light); font-size: 0.75rem; flex: 1; }
+.gb-del {
+    border: none; background: none;
+    color: var(--text-light); cursor: pointer;
+    font-size: 0.85rem; padding: 2px 4px;
+    font-family: inherit;
+    transition: color 0.2s;
+}
+.gb-del:hover { color: #e05555; }
+.gb-msg {
+    color: var(--text-mid); font-size: 0.9rem;
+    white-space: pre-wrap; word-break: break-word;
+    line-height: 1.7;
+}
+
 /* ── CLOSING ── */
 .closing { text-align: center; padding: 40px 20px; font-size: 1rem; color: var(--text-mid); line-height: 1.9; }
 
