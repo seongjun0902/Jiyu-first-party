@@ -538,10 +538,11 @@
     }
 
     function applyHeroImage(url) {
+        const resized = cldResize(url, 1200);
         const img = document.getElementById('heroPhoto');
-        if (img) img.src = url || '';
+        if (img) img.src = resized || '';
         const p = document.getElementById('heroPreviewImg');
-        if (p) p.src = url || '';
+        if (p) p.src = resized || '';
     }
 
     function applyGpUrl(url) {
@@ -559,12 +560,18 @@
         applyFrame(appState.settings.frame || 'A');
     }
 
+    /* Cloudinary URL에 리사이즈+자동압축 변환 적용 (원본 대신 필요한 크기만 다운로드) */
+    function cldResize(url, w) {
+        if (!url || !url.includes('res.cloudinary.com') || !url.includes('/upload/')) return url;
+        return url.replace('/upload/', '/upload/w_' + w + ',q_auto,f_auto/');
+    }
+
     function makePhotoItem(url) {
         const d = document.createElement('div');
         d.className = 'photo-item';
-        d.onclick = () => openLightbox(url);
+        d.onclick = () => openLightbox(cldResize(url, 1600));
         const img = document.createElement('img');
-        img.src = url; img.alt = '김지유'; img.loading = 'lazy';
+        img.src = cldResize(url, 600); img.alt = '김지유'; img.loading = 'lazy'; img.decoding = 'async';
         d.appendChild(img);
         return d;
     }
@@ -905,7 +912,7 @@
         appState.photos.forEach(p => {
             const item = document.createElement('div');
             item.className = 'gallery-manage-item';
-            const img = document.createElement('img'); img.src = p.url;
+            const img = document.createElement('img'); img.src = cldResize(p.url, 200);
             const del = document.createElement('button');
             del.className = 'admin-btn-danger'; del.textContent = '삭제';
             del.onclick = () => db.ref('gallery/photos/' + p.key).remove();
