@@ -675,17 +675,22 @@ body {
     border-radius: 14px;
     padding: 14px 16px;
 }
-.gb-item-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.gb-item-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
 .gb-name { font-weight: 600; color: var(--text); font-size: 0.95rem; }
 .gb-date { color: var(--text-light); font-size: 0.75rem; flex: 1; }
-.gb-del {
+.gb-edit, .gb-del {
     border: none; background: none;
     color: var(--text-light); cursor: pointer;
     font-size: 0.85rem; padding: 2px 4px;
     font-family: inherit;
     transition: color 0.2s;
 }
+.gb-edit:hover { color: var(--gold); }
 .gb-del:hover { color: #e05555; }
+.gb-edit-box { margin-top: 8px; }
+.gb-edit-actions { display: flex; gap: 8px; margin-top: 8px; }
+.gb-edit-actions .admin-btn-primary,
+.gb-edit-actions .admin-btn-secondary { width: auto; flex: 1; padding: 8px 14px; }
 .gb-msg {
     color: var(--text-mid); font-size: 0.9rem;
     white-space: pre-wrap; word-break: break-word;

@@ -1067,6 +1067,40 @@
         db.ref('guestbook/' + key).remove().then(() => showToast('삭제되었습니다'));
     }
 
+    async function editGuestbookEntry(key, pwHash, item, currentMsg) {
+        if (!db) { showToast('네트워크 연결을 확인해주세요'); return; }
+        if (item.querySelector('.gb-edit-box')) return; /* 이미 수정 중 */
+        const input = prompt('작성할 때 입력한 비밀번호 4자리를 입력해주세요');
+        if (input == null) return;
+        const ok = appState.isAdmin || (await gbHash(input.trim())) === pwHash;
+        if (!ok) { showToast('비밀번호가 틀렸습니다'); return; }
+
+        const msgEl = item.querySelector('.gb-msg');
+        if (msgEl) msgEl.style.display = 'none';
+        const box = document.createElement('div');
+        box.className = 'gb-edit-box';
+        const ta = document.createElement('textarea');
+        ta.className = 'admin-input'; ta.rows = 3; ta.value = currentMsg; ta.maxLength = 500;
+        const row = document.createElement('div'); row.className = 'gb-edit-actions';
+        const save = document.createElement('button');
+        save.className = 'admin-btn-primary gb-edit-save'; save.textContent = '저장'; save.type = 'button';
+        const cancel = document.createElement('button');
+        cancel.className = 'admin-btn-secondary gb-edit-cancel'; cancel.textContent = '취소'; cancel.type = 'button';
+        cancel.onclick = () => { box.remove(); if (msgEl) msgEl.style.display = ''; };
+        save.onclick = () => {
+            const val = ta.value.trim();
+            if (!val) { showToast('내용을 입력해주세요'); return; }
+            save.disabled = true;
+            db.ref('guestbook/' + key).update({ msg: val })
+                .then(() => showToast('수정되었습니다'))
+                .catch(e => { console.error('방명록 수정 실패:', e); showToast('수정에 실패했어요'); save.disabled = false; });
+        };
+        row.appendChild(save); row.appendChild(cancel);
+        box.appendChild(ta); box.appendChild(row);
+        item.appendChild(box);
+        ta.focus();
+    }
+
     function fmtGbDate(ts) {
         if (!ts) return '';
         const d = new Date(ts);
@@ -1098,10 +1132,13 @@
             name.className = 'gb-name'; name.textContent = e.name || '';
             const date = document.createElement('span');
             date.className = 'gb-date'; date.textContent = fmtGbDate(e.createdAt);
+            const edit = document.createElement('button');
+            edit.className = 'gb-edit'; edit.textContent = '✎'; edit.title = '수정'; edit.type = 'button';
+            edit.onclick = () => editGuestbookEntry(e.key, e.pw, item, e.msg || '');
             const del = document.createElement('button');
             del.className = 'gb-del'; del.textContent = '✕'; del.title = '삭제'; del.type = 'button';
             del.onclick = () => deleteGuestbookEntry(e.key, e.pw);
-            head.appendChild(name); head.appendChild(date); head.appendChild(del);
+            head.appendChild(name); head.appendChild(date); head.appendChild(edit); head.appendChild(del);
             const msg = document.createElement('p');
             msg.className = 'gb-msg'; msg.textContent = e.msg || '';
             item.appendChild(head); item.appendChild(msg);
