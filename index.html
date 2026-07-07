@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>김지유 첫 번째 생일잔치</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Gothic:wght@400;700&family=Gowun+Dodum&family=Gamja+Flower&family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;500;700&family=Do+Hyeon&family=Single+Day&family=Jua&family=Dongle:wght@300;400;700&family=Poor+Story&family=Hi+Melody&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="preconnect" href="https://first-party-756ff-default-rtdb.firebaseio.com">
+    <link rel="preconnect" href="https://res.cloudinary.com">
+    <!-- 폰트는 렌더링을 막지 않도록 비동기 로드 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Gothic:wght@400;700&family=Gowun+Dodum&family=Gamja+Flower&family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;500;700&family=Do+Hyeon&family=Single+Day&family=Jua&family=Dongle:wght@300;400;700&family=Poor+Story&family=Hi+Melody&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Gothic:wght@400;700&family=Gowun+Dodum&family=Gamja+Flower&family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;500;700&family=Do+Hyeon&family=Single+Day&family=Jua&family=Dongle:wght@300;400;700&family=Poor+Story&family=Hi+Melody&display=swap"></noscript>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -64,7 +71,7 @@
             </div>
         </div>
         <div class="hero-photo-wrap" id="heroPhotoWrap">
-            <img src="" alt="김지유" class="hero-photo" id="heroPhoto">
+            <img src="" alt="김지유" class="hero-photo" id="heroPhoto" fetchpriority="high" decoding="async">
         </div>
     </header>
 
@@ -496,6 +503,7 @@
     function startBubbles() {
         stopBubbles();
         bubbleTimer = setInterval(() => {
+            if (document.hidden) return;
             const layer = document.getElementById('bubbleLayer');
             if (!layer) return;
             const b = document.createElement('span');
@@ -571,43 +579,59 @@
         }
     }
 
+    /* ── APPLY ALL (Firebase 스냅샷 또는 localStorage 캐시 공용) ── */
+    function applyAll(d) {
+        appState.settings = { ...DEFAULTS.settings, ...(d.settings || {}) };
+        applyTheme(appState.settings.theme);
+        applyFont(appState.settings.font);
+        applyHeroImage(appState.settings.heroImageUrl);
+        applyHeroEffect(appState.settings.heroEffect);
+        applyCardFrame(appState.settings.cardFrame || 'A');
+        applyBadgeStyle(appState.settings.badgeStyle || 'A');
+        applyGpUrl(appState.settings.googlePhotosUrl);
+
+        appState.texts = { ...DEFAULTS.texts, ...(d.texts || {}) };
+        applyTexts(appState.texts);
+
+        const raw = d.gallery && d.gallery.photos;
+        appState.photos = raw
+            ? Object.entries(raw).map(([key, val]) => ({ key, ...val }))
+            : [];
+        applyGallery(appState.photos);
+
+        appState.location = { ...DEFAULTS.location, ...(d.location || {}) };
+        applyLocation(appState.location);
+
+        if (appState.isAdmin) refreshAdminUI();
+    }
+
+    function hideOverlay() {
+        const overlay = document.getElementById('loadingOverlay');
+        if (overlay) {
+            overlay.classList.add('fade-out');
+            setTimeout(() => overlay.remove(), 500);
+        }
+    }
+
     /* ── FIREBASE LOAD ── */
     function loadFromFirebase() {
+        /* 재방문: 캐시된 전체 데이터로 즉시 렌더링 (Firebase 대기 없음) */
+        try {
+            const cached = JSON.parse(localStorage.getItem('jiyu_cache') || 'null');
+            if (cached && cached.data) {
+                applyAll(cached.data);
+                hideOverlay();
+                firstLoad = false;
+            }
+        } catch(e) {}
+
         db.ref('/').on('value', snap => {
             const d = snap.val() || {};
-
-            appState.settings = { ...DEFAULTS.settings, ...(d.settings || {}) };
-            applyTheme(appState.settings.theme);
-            applyFont(appState.settings.font);
-            applyHeroImage(appState.settings.heroImageUrl);
-            applyHeroEffect(appState.settings.heroEffect);
-            applyCardFrame(appState.settings.cardFrame || 'A');
-            applyBadgeStyle(appState.settings.badgeStyle || 'A');
-            applyGpUrl(appState.settings.googlePhotosUrl);
-
-            appState.texts = { ...DEFAULTS.texts, ...(d.texts || {}) };
-            applyTexts(appState.texts);
-
-            const raw = d.gallery && d.gallery.photos;
-            appState.photos = raw
-                ? Object.entries(raw).map(([key, val]) => ({ key, ...val }))
-                : [];
-            applyGallery(appState.photos);
-
-            appState.location = { ...DEFAULTS.location, ...(d.location || {}) };
-            applyLocation(appState.location);
-
-            if (appState.isAdmin) refreshAdminUI();
-
-            /* ── 첫 로드: 오버레이 제거 + localStorage 캐시 ── */
+            applyAll(d);
+            try { localStorage.setItem('jiyu_cache', JSON.stringify({ theme: appState.settings.theme, data: d })); } catch(e) {}
             if (firstLoad) {
                 firstLoad = false;
-                try { localStorage.setItem('jiyu_cache', JSON.stringify({ theme: appState.settings.theme })); } catch(e) {}
-                const overlay = document.getElementById('loadingOverlay');
-                if (overlay) {
-                    overlay.classList.add('fade-out');
-                    setTimeout(() => overlay.remove(), 500);
-                }
+                hideOverlay();
             }
         });
     }
@@ -676,7 +700,11 @@
             btn.onclick = () => {
                 applyTheme(id);
                 db.ref('settings/theme').set(id);
-                try { localStorage.setItem('jiyu_cache', JSON.stringify({ theme: id })); } catch(e) {}
+                try {
+                    const c = JSON.parse(localStorage.getItem('jiyu_cache') || '{}');
+                    c.theme = id;
+                    localStorage.setItem('jiyu_cache', JSON.stringify(c));
+                } catch(e) {}
                 g.querySelectorAll('.theme-swatch').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
             };
@@ -970,6 +998,7 @@
     const SC = ['✦','✧','⋆','✿','♡','❀'];
     const SK = ['#c9a96e','#f4a7b9','#e8d0a0','#ddb8e8','#f0b8c8'];
     setInterval(() => {
+        if (document.hidden) return;
         const layer = document.getElementById('heroSparkleLayer');
         if (!layer) return;
         const el = document.createElement('span');
