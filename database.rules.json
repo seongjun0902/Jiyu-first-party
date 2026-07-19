@@ -1,0 +1,23 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": false,
+
+    "guestbook": {
+      ".write": true
+    },
+
+    "settings": {
+      ".write": "auth != null"
+    },
+    "texts": {
+      ".write": "auth != null"
+    },
+    "location": {
+      ".write": "auth != null"
+    },
+    "gallery": {
+      ".write": "auth != null"
+    }
+  }
+}

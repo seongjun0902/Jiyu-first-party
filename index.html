@@ -277,6 +277,7 @@
                     <button class="admin-tab" onclick="switchTab('photo',this)">메인사진</button>
                     <button class="admin-tab" onclick="switchTab('gallery',this)">갤러리</button>
                     <button class="admin-tab" onclick="switchTab('location',this)">장소</button>
+                    <button class="admin-tab" onclick="doLogout()" style="margin-left:auto">로그아웃</button>
                 </div>
 
                 <!-- 테마 탭 -->
@@ -351,6 +352,7 @@
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 
     <script>
     /* ── CONFIG ── */
@@ -703,19 +705,52 @@
         document.getElementById('adminPanel').classList.remove('open');
     }
 
-    /* ── LOGIN ── */
-    function doLogin() {
+    /* ── LOGIN (Firebase Auth) ──
+       관리자 계정은 Firebase 콘솔 > Authentication > Users 에서 미리 만들어둔
+       이메일/비밀번호 계정이어야 한다. 아래 매핑은 화면의 "아빠/엄마" 선택을
+       실제 로그인 이메일로 바꿔줄 뿐, 비밀번호는 여기 코드에 존재하지 않는다. */
+    const ADMIN_LOGIN_EMAIL = {
+        father: 'father@jiyu-first-party.app',
+        mother: 'mother@jiyu-first-party.app'
+    };
+
+    async function doLogin() {
         const u = document.getElementById('loginUser').value;
         const p = document.getElementById('loginPw').value;
-        if ((u === 'father' || u === 'mother') && p === '1120') {
-            appState.isAdmin = true;
-            document.getElementById('adminLogin').style.display = 'none';
-            document.getElementById('adminTabs').style.display = 'block';
-            buildAdminUI();
-        } else {
-            document.getElementById('loginErr').textContent = '비밀번호가 틀렸습니다.';
+        const email = ADMIN_LOGIN_EMAIL[u];
+        const errEl = document.getElementById('loginErr');
+        errEl.textContent = '';
+        if (!email || !p) { errEl.textContent = '비밀번호를 입력해주세요.'; return; }
+        try {
+            await firebase.auth().signInWithEmailAndPassword(email, p);
+            /* 화면 전환은 onAuthStateChanged 에서 처리됨 */
+        } catch (e) {
+            console.error('로그인 실패:', e);
+            errEl.textContent = '비밀번호가 틀렸습니다.';
         }
     }
+
+    function doLogout() {
+        firebase.auth().signOut();
+        closeAdmin();
+    }
+
+    try {
+        firebase.auth().onAuthStateChanged(user => {
+            appState.isAdmin = !!user;
+            const loginEl = document.getElementById('adminLogin');
+            const tabsEl  = document.getElementById('adminTabs');
+            if (user) {
+                loginEl.style.display = 'none';
+                tabsEl.style.display  = 'block';
+                buildAdminUI();
+            } else {
+                loginEl.style.display = 'block';
+                tabsEl.style.display  = 'none';
+                document.getElementById('loginPw').value = '';
+            }
+        });
+    } catch (e) { console.warn('Firebase Auth 초기화 실패:', e); }
 
     function switchTab(id, btn) {
         document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.remove('active'));
