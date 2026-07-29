@@ -303,6 +303,108 @@ body {
     display: inline-block;
 }
 
+/* ── VIDEO ── */
+/* 제목·구분선 없이 영상만: 카드와 같은 라운드/그림자로 톤을 맞춤 */
+.video-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    border-radius: 24px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--hero-1), var(--hero-2));
+    box-shadow: 0 4px 30px var(--shadow), 0 1px 8px var(--shadow-pk);
+}
+
+/* width/height auto + max 제한: 세로 영상도 가로 영상도 여백 없이 맞춰짐 */
+.party-video {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 24px;
+}
+
+/* 전체화면: max-height 제한을 풀어야 화면을 꽉 채움
+   ※ 두 선택자를 한 규칙에 묶으면 미지원 브라우저가 규칙 전체를 버리므로 반드시 분리 */
+.party-video:fullscreen {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+    object-fit: contain;
+    background: #000;
+}
+.party-video:-webkit-full-screen {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+    object-fit: contain;
+    background: #000;
+}
+
+/* 소리 · 전체화면 버튼 */
+.video-controls {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+.video-btn {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.42);
+    color: #fff;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s, transform 0.2s;
+}
+.video-btn:hover  { background: rgba(0, 0, 0, 0.6); transform: scale(1.07); }
+.video-btn:active { transform: scale(0.94); }
+
+/* 자동재생이 브라우저에 막힌 경우에만 가운데 재생 버튼 노출 */
+.video-play-overlay {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 62px;
+    height: 62px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    z-index: 3;
+}
+.video-wrap.needs-play .video-play-overlay {
+    display: flex;
+    animation: video-play-pulse 2s ease-in-out infinite;
+}
+.video-wrap.needs-play .video-controls { display: none; }
+
+@keyframes video-play-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.36); }
+    50%      { box-shadow: 0 0 0 13px rgba(255, 255, 255, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .video-wrap.needs-play .video-play-overlay { animation: none; }
+}
+
 /* ── GREETING ── */
 .greeting-body { text-align: center; }
 .greeting-body p { font-size: 0.97rem; color: var(--text-mid); margin-bottom: 15px; line-height: 2.1; }
@@ -1101,4 +1203,6 @@ textarea.admin-input { resize: vertical; min-height: 64px; }
     .map-wrap        { height: 260px; }
     .photo-grid      { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .admin-tab       { padding: 7px 10px; font-size: 0.82rem; }
+    .party-video     { max-height: 62vh; border-radius: 18px; }
+    .video-wrap      { border-radius: 18px; }
 }

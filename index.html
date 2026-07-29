@@ -102,6 +102,49 @@
 
     <main class="container">
 
+        <!-- 영상 -->
+        <section id="movie" class="section fade-in">
+            <div class="video-wrap" id="videoWrap">
+                <video id="partyVideo" class="party-video"
+                       src="./video/jiyu.mp4"
+                       autoplay muted loop playsinline
+                       preload="metadata"
+                       disablepictureinpicture
+                       controlslist="nodownload noplaybackrate">
+                    영상을 재생할 수 없는 브라우저입니다.
+                </video>
+                <!-- 자동재생이 브라우저에 막힌 경우에만 노출 -->
+                <button type="button" class="video-play-overlay" id="videoPlayOverlay"
+                        aria-label="재생" title="재생">
+                    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+                        <path d="M7 4l13 8-13 8V4z" fill="currentColor"/>
+                    </svg>
+                </button>
+
+                <div class="video-controls" id="videoControls">
+                    <button type="button" class="video-btn" id="videoSoundBtn"
+                            aria-label="소리 켜기" title="소리 켜기">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                             stroke-linecap="round" stroke-linejoin="round" width="17" height="17">
+                            <path d="M11 5 6 9H3v6h3l5 4V5z"/>
+                            <line x1="17" y1="9" x2="22" y2="15"/>
+                            <line x1="22" y1="9" x2="17" y2="15"/>
+                        </svg>
+                    </button>
+                    <button type="button" class="video-btn" id="videoFsBtn"
+                            aria-label="전체화면" title="전체화면">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" width="17" height="17">
+                            <path d="M8 3H5a2 2 0 0 0-2 2v3"/>
+                            <path d="M16 3h3a2 2 0 0 1 2 2v3"/>
+                            <path d="M8 21H5a2 2 0 0 1-2-2v-3"/>
+                            <path d="M16 21h3a2 2 0 0 0 2-2v-3"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
         <!-- 인사말 -->
         <section id="greeting" class="section fade-in">
             <div class="card">
@@ -1226,6 +1269,127 @@
         layer.appendChild(el);
         setTimeout(() => el.remove(), 3800);
     }, 340);
+
+    /* ── VIDEO ── */
+    (function initVideo() {
+        const vid     = document.getElementById('partyVideo');
+        const wrap    = document.getElementById('videoWrap');
+        const btn     = document.getElementById('videoSoundBtn');
+        const fsBtn   = document.getElementById('videoFsBtn');
+        const playBtn = document.getElementById('videoPlayOverlay');
+        if (!vid || !wrap || !btn || !fsBtn || !playBtn) return;
+
+        const ICON_MUTED = '<path d="M11 5 6 9H3v6h3l5 4V5z"/><line x1="17" y1="9" x2="22" y2="15"/><line x1="22" y1="9" x2="17" y2="15"/>';
+        const ICON_SOUND = '<path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/>';
+
+        function syncSoundIcon() {
+            const label = vid.muted ? '소리 켜기' : '소리 끄기';
+            btn.querySelector('svg').innerHTML = vid.muted ? ICON_MUTED : ICON_SOUND;
+            btn.setAttribute('aria-label', label);
+            btn.setAttribute('title', label);
+        }
+
+        // 영상 파일이 없거나 재생 불가하면 섹션 자체를 숨김 (빈 카드 노출 방지)
+        vid.addEventListener('error', () => {
+            const sec = document.getElementById('movie');
+            if (sec) sec.style.display = 'none';
+        });
+
+        // 실제로 재생이 시작되면 재생 버튼을 감춤
+        // (autoplay 속성이 이미 재생을 시작한 뒤 play()가 중단돼 catch가 도는 경우 대비)
+        vid.addEventListener('playing', () => {
+            wrap.classList.remove('needs-play');
+            syncSoundIcon();
+        });
+
+        // 자동재생 시도 → 브라우저가 막으면 가운데 재생 버튼 노출
+        const p = vid.play();
+        if (p && typeof p.catch === 'function') {
+            p.catch(() => {
+                if (!vid.paused) return;   // 이미 재생 중이면 무시
+                wrap.classList.add('needs-play');
+            });
+        }
+
+        playBtn.addEventListener('click', () => {
+            wrap.classList.remove('needs-play');
+            vid.play().catch(() => {});
+        });
+
+        btn.addEventListener('click', () => {
+            vid.muted = !vid.muted;
+            if (!vid.muted) vid.play().catch(() => {});   // 음소거 해제 직후 멈추는 브라우저 대비
+            syncSoundIcon();
+        });
+
+        /* ── 전체화면 (비디오 앱처럼 가로로 꽉 채움) ── */
+        function isFullscreen() {
+            return !!(document.fullscreenElement || document.webkitFullscreenElement);
+        }
+
+        fsBtn.addEventListener('click', () => {
+            if (isFullscreen()) {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                return;
+            }
+
+            // 전체화면에서는 네이티브 컨트롤(재생·볼륨·탐색)을 그대로 사용
+            vid.controls = true;
+
+            // 음소거는 여기서 건드리지 않음 — 사용자가 소리 버튼을 눌러야만 해제됨
+            const req = vid.requestFullscreen || vid.webkitRequestFullscreen;
+            if (req) {
+                Promise.resolve(req.call(vid))
+                    .then(() => {
+                        // 모바일만 가로 고정 (데스크톱은 거부되므로 조용히 무시)
+                        if (screen.orientation && screen.orientation.lock) {
+                            screen.orientation.lock('landscape').catch(() => {});
+                        }
+                    })
+                    .catch(() => { vid.controls = false; });
+            } else if (typeof vid.webkitEnterFullscreen === 'function') {
+                // iPhone Safari: 전용 전체화면 플레이어 (가로 회전은 OS가 처리)
+                vid.webkitEnterFullscreen();
+            } else {
+                vid.controls = false;
+            }
+        });
+
+        function onFsChange() {
+            if (isFullscreen()) return;
+            // 인라인으로 복귀: 커스텀 컨트롤로 되돌림 (음소거 상태는 사용자 선택 그대로 유지)
+            vid.controls = false;
+            if (screen.orientation && screen.orientation.unlock) {
+                try { screen.orientation.unlock(); } catch (e) {}
+            }
+            vid.play().catch(() => {});
+        }
+        document.addEventListener('fullscreenchange', onFsChange);
+        document.addEventListener('webkitfullscreenchange', onFsChange);
+        // iPhone 전용 플레이어 종료 시
+        vid.addEventListener('webkitendfullscreen', () => {
+            vid.controls = false;
+            vid.play().catch(() => {});
+        });
+
+        // 네이티브 컨트롤로 음소거를 바꿔도 커스텀 버튼 아이콘이 어긋나지 않도록
+        vid.addEventListener('volumechange', syncSoundIcon);
+
+        // 화면에서 벗어나면 일시정지 (배터리 · 데이터 절약)
+        // 단, 전체화면 중에는 건드리지 않음
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (isFullscreen()) return;
+                    if (e.isIntersecting) {
+                        if (!wrap.classList.contains('needs-play')) vid.play().catch(() => {});
+                    } else {
+                        vid.pause();
+                    }
+                });
+            }, { threshold: 0.25 }).observe(vid);
+        }
+    })();
 
     /* ── FADE IN ON SCROLL ── */
     const io = new IntersectionObserver(entries => {
