@@ -4,7 +4,7 @@
     ".write": false,
 
     "guestbook": {
-      ".write": true
+      ".write": "auth != null"
     },
 
     "settings": {
